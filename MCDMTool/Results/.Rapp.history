@@ -1,0 +1,2154 @@
+freqs <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+for(i in 1:51){#
+	freq[,i+1]=hist(freqs[,i],seq(-100,800,10),include.lowest = TRUE,plot=FALSE)$counts#
+}
+freq <- vec(91,52)#
+freqs <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+for(i in 1:51){#
+	freq[,i+1]=hist(freqs[,i],seq(-100,800,10),include.lowest = TRUE,plot=FALSE)$counts#
+}
+freq <- mat.or.vec(91,52)#
+freqs <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+for(i in 1:51){#
+	freq[,i+1]=hist(freqs[,i],seq(-100,800,10),include.lowest = TRUE,plot=FALSE)$counts#
+}
+freq
+hist(freqs[,i],seq(-100,800,10),include.lowest = TRUE,plot=FALSE)$counts
+freq <- mat.or.vec(90,52)#
+freqs <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+for(i in 1:51){#
+	freq[,i+1]=hist(freqs[,i],seq(-100,800,10),include.lowest = TRUE,plot=FALSE)$counts#
+}
+max(freqs[,50])
+max(freqs[,50],na.rm=TRUE)
+freqs[,50]
+max(freqs[,30])
+max(freqs[,35])
+max(freqs[1,])
+max(freqs[2,])
+max(freqs[3,])
+max(freqs[4,])
+max(max(freqs[,]))
+min(freqs)
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")
+min(freqs2)
+max(freqs2)
+freq1 <- mat.or.vec()#
+freq2 <- mat.or.vec()#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-100,1100,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-100,1100,20),include.lowest = TRUE,plot=FALSE)$counts#
+}
+rm(list=ls())
+freq1 <- mat.or.vec(60,52)#
+freq2 <- mat.or.vec(60,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-100,1100,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-100,1100,20),include.lowest = TRUE,plot=FALSE)$counts#
+}
+rm(list=ls())
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}
+freq1
+freq2
+freq1[,1]=seq(-120,1200,20)#
+freq2[,1]=seq(-120,1200,20)
+seq(-120,1200,20)
+freq1[,1]=seq(-100,1200,20)#
+freq2[,1]=seq(-100,1200,20)
+freq1
+?rqfreqplot
+??rqfreqplot
+?rqFreqPlot
+??rqFreqPlot
+rqFreqPlot(freq1, freqs1, barscale = .35, barcol = "gray90",#
+    boxwex = .15, xlim = c(0, 52), ylim = c(-120,1200), main = "",#
+    xlab = expression(paste(italic("t"), " (years)")),#
+    ylab1 = expression(paste(italic("D"), " (mm)")),#
+    ylab2 = expression(paste(Delta, italic("D"), " (mm)")), las = 1, lty = 1)#
+title("Sea urchin growth modeled using quantile regression")
+rm(list=ls())
+### A graph for presenting individual growth with time in a population with:#
+### Histograms of size distribution with time,#
+### Quantile regressions for the median and 5% / 95% percentiles,#
+### A graph quantile residuals using boxplots around the median model.#
+####
+### This graph is Fig. 2 of the paper: Grosjean, PH, Ch. Spirlet & M. Jangoux,#
+### 2003. A functional growth model with intraspecific competition applied to a#
+### sea urchin, Paracentrotus lividus. Can. J. Fish. Aquat. Sci., 60:237-246.#
+#
+### Requires two libraries and a couple of custom functions + an example dataset#
+library(stats)#
+library(quantreg)#
+#
+##### Custom functions required #####################################
+# Fuzzy-remanent growth curve with two different kinetic parameters#
+# passing by {0, 0}#
+# See Grosjean et al, 2003, Can. J. Fish. Aquat. Sci. 60:237-246,#
+# for definition and discussion of this growth model#
+fuzremOrig2 <- function (input, Asym, lrc1, lrc2, c0) {#
+    .expr1 <- exp(lrc1)#
+    .expr4 <- exp(-.expr1 * input)#
+    .expr5 <- 1 - .expr4#
+    .expr6 <- Asym * .expr5#
+    .expr7 <- exp(lrc2)#
+    .expr9 <- input - c0#
+    .expr11 <- exp(-.expr7 * .expr9)#
+    .expr12 <- 1 + .expr11#
+    .expr22 <- .expr12^2#
+    .value <- .expr6/.expr12#
+    .actualArgs <- as.list(match.call()[c("Asym", "lrc1", "lrc2", "c0")])#
+    if (all(unlist(lapply(.actualArgs, is.name)))) {#
+        .grad <- array(0, c(length(.value), 4),#
+            list(NULL, c("Asym", "lrc1", "lrc2", "c0")))#
+        .grad[, "Asym"] <- .expr5 / .expr12#
+        .grad[, "lrc1"] <- Asym * (.expr4 * (.expr1 * input)) / .expr12#
+        .grad[, "lrc2"] <- .expr6 * (.expr11 * (.expr7 * .expr9)) / .expr22#
+        .grad[, "c0"] <- -.expr6 * (.expr11 * .expr7) / .expr22#
+        dimnames(.grad) <- list(NULL, .actualArgs)#
+        attr(.value, "gradient") <- .grad#
+    }#
+    .value#
+}#
+# Self-starting function for fuzremOrig2#
+fuzremOrig2.ival <- function (mCall, data, LHS) {#
+    xy <- sortedXyData(mCall[["input"]], LHS, data)#
+    if (nrow(xy) < 5) {#
+        stop("Too few distinct input values to fit a fuzzy-remanent growth function with 2 kinetic parameter passing by {0, 0}")#
+    }#
+    xydata <- c(as.list(xy), c0 = NLSstClosestX(xy, mean(range(xy[["y"]]))))#
+    xydata <- as.list(xydata)#
+    options(show.error.messages = FALSE)#
+    # Sometimes, the following evaluation gives an error#
+    # (singular gradient, ...). Try another way to estimate initial parameters#
+    pars <- try(as.vector(coef(nls(y ~ (1 - exp(-exp(lrc) * x))/#
+        (1 + exp((c0 - x)*exp(lrc))), data = xydata, start = list(lrc = 0),#
+        algorithm = "plinear"))))#
+    if (!is.null(class(pars)) && class(pars) == "try-error") {#
+        cat("Using second alternative for initial parameters estimation\n")#
+        options(show.error.messages = TRUE)#
+        pars <- as.vector(coef(nls(y ~ SSlogis(x, Asym, xmid, scal),#
+            data = xydata)))#
+        xydata$c0 <- pars[2]#
+        pars[1] <- log(1/pars[3])#
+    } else { options(show.error.messages = TRUE)}#
+    pars <- as.vector(coef(nls(y ~ (1 - exp(-exp(lrc1) * x))/#
+        (1 + exp((c0 - x)*exp(lrc2))), data = data.frame(xy),#
+        start = list(c0 = xydata$c0, lrc1 = pars[1], lrc2 = pars[1]),#
+        algorithm = "plinear")))#
+    value <- c(pars[4], pars[2], pars[3], pars[1])#
+    names(value) <- mCall[c("Asym", "lrc1", "lrc2", "c0")]#
+    return(value)#
+}#
+# Self-Starting function, combining fuzremOrig2 and fuzremOrig2.ival#
+SSfuzremOrig2 <- selfStart(fuzremOrig2, fuzremOrig2.ival, para = "", template = "")#
+remove(fuzremOrig2, fuzremOrig2.ival)#
+attr(SSfuzremOrig2,"pnames") <- c("Asym", "lrc1", "lrc2", "c0")#
+#
+# Expand a "class"-"frequencies at time" data frame into#
+# a "time"-"mean size in class" data frame#
+expandFreq <- function(ages, freqs) {#
+	for (i in 2:ncol(freqs)){#
+		size <- rep(freqs[, 1], freqs[, i])#
+		age <- rep(ages[i-1], length(size))#
+		if (i == 2){#
+			res <- cbind(age, size)#
+		} else {#
+			res <- rbind(res, cbind(age, size))#
+		}#
+	}#
+	res <- as.data.frame(res)#
+	return(res)#
+}#
+#
+# Plot of size distributions, quantiles regressions and residuals diagnosis#
+# (boxplot) for curves tau = 0.05, 0.5 & 0.95 in the case of individual size#
+# distributions are known at each sampled time#
+rqFreqPlot <- function(ages, freqs, agecurves, curves, xlim = c(min(ages),#
+    max(ages)), ylim = c(min(curves), max(curves)), barscale = 100, barcol = 8,#
+    boxwex = 50, ylab1 = "", ylab2 = "", lty = c(2, 1, 2), ...) {#
+ 	# Verify parameters ages and agecurves#
+	if (!all(ages %in% agecurves))#
+		stop("ages must be a subset of agecurves!")#
+#
+	# Create a layout for the histograms and the boxplots#
+	nf <- layout(matrix(c(2,1),2,1,byrow = TRUE), widths = 7,#
+        heights = c(2, 5), respect = TRUE)#
+	layout.show(nf)#
+	par(mar = c(5, 4, 0, 2), lab = c(5, 5, 7))#
+	# Draw the curves#
+	par(new = FALSE)#
+	X <- matrix(rep(agecurves, ncol(curves)), nrow = length(agecurves),#
+        ncol = ncol(curves))#
+	Y <- curves#
+	matplot(X, Y, type = "l", xaxs = "i", lty = lty, col = 1, lwd = 2,#
+        bty = "l", xlim = xlim, ylim = ylim, ylab = ylab1, ...)#
+	# Draw the histograms#
+	for (i in 1:length(ages)){#
+		par(new = TRUE)#
+		xmin <- -ages[i] + xlim[1]#
+		xmax <- xlim[2] - ages[i]#
+		ser <- freqs[, i+1]#
+		ser <- ser/max(ser) * barscale#
+		barplot(ser, horiz = TRUE, axes = FALSE, xlim = c(xmin, xmax),#
+            ylim = ylim, col = barcol, space = 0)#
+	}#
+	# Add a residual analysis above the graph#
+	spreadCalc <- function(x, na.rm = FALSE){#
+		# Substract median from expanded frequencies data#
+		# And narrow range to 0.05 - 0.95 quantiles#
+		res <- x#
+		q <- quantile(res, c(0.05, 0.95), na.rm = na.rm)#
+		res[res < q[1]] <- q[1]#
+		res[res > q[2]] <- q[2]#
+		return(res)#
+	}#
+	## Expand one or several frequency columns into individual measurements#
+	expandFreq2 <- function(freqs) {#
+		# Consider mean size at each class for expanding the observations#
+		# with classes being first column and frequencies in each class#
+        # in the following columns#
+		# A list of vectors is returned#
+		res <- list(NULL)#
+		nCols <- ncol(freqs)#
+		for (i in 2:nCols)#
+			res[[i-1]] <- rep(freqs[, 1], freqs[, i])#
+		return(res)#
+	}#
+#
+	# A modified boxplot.default() function with different parameters#
+    # (no box around the graph and plain lines for hinges)#
+	boxplot2 <- function (x, ..., range = 1.5, width = NULL, varwidth = FALSE,#
+        notch = FALSE, outline = TRUE, names, boxwex = 0.8, plot = TRUE,#
+        border = par("fg"), col = NULL, log = "", pars = NULL,#
+        horizontal = FALSE, add = FALSE, at = NULL) {#
+	    args <- list(x, ...)#
+	    namedargs <- if (!is.null(attributes(args)$names))#
+	        attributes(args)$names != ""#
+	    else rep(FALSE, length = length(args))#
+	    pars <- c(args[namedargs], pars)#
+	    groups <- if (is.list(x))#
+	        x#
+	    else args[!namedargs]#
+	    if (0 == (n <- length(groups)))#
+	        stop("invalid first argument")#
+	    if (length(class(groups)))#
+	        groups <- unclass(groups)#
+	    if (!missing(names))#
+	        attr(groups, "names") <- names#
+	    else {#
+	        if (is.null(attr(groups, "names")))#
+	            attr(groups, "names") <- 1:n#
+	        names <- attr(groups, "names")#
+	    }#
+	    for (i in 1:n) groups[i] <- list(boxplot.stats(groups[[i]], range))#
+	    stats <- matrix(0, nr = 5, nc = n)#
+	    conf <- matrix(0, nr = 2, nc = n)#
+	    ng <- out <- group <- numeric(0)#
+	    ct <- 1#
+	    for (i in groups) {#
+	        stats[, ct] <- i$stats#
+	        conf[, ct] <- i$conf#
+	        ng <- c(ng, i$n)#
+	        if ((lo <- length(i$out))) {#
+	            out <- c(out, i$out)#
+	            group <- c(group, rep(ct, lo))#
+	        }#
+	        ct <- ct + 1#
+	    }#
+	    z <- list(stats = stats, n = ng, conf = conf, out = out, group = group, names = names)#
+	    if (plot) {#
+	        bxp2(z, width, varwidth = varwidth, notch = notch, boxwex = boxwex, border = border, col = col, log = log, pars = pars, outline = outline, horizontal = horizontal, add = add, at = at)#
+	        invisible(z)#
+	    }#
+	    else z#
+	}#
+#
+	# A modified bxp() function for plotting the boxplot generated by boxplot2()#
+	bxp2 <- function (z, notch = FALSE, width = NULL, varwidth = FALSE,#
+        outline = TRUE, notch.frac = 0.5, boxwex = 0.8, border = par("fg"),#
+        col = NULL, log = "", pars = NULL, frame.plot = axes,#
+        horizontal = FALSE, add = FALSE, at = NULL, show.names = NULL, ...) {#
+	    pars <- c(pars, list(...))#
+	    bplt <- function(x, wid, stats, out, conf, notch, border,#
+	        col, horizontal) {#
+	        if (!any(is.na(stats))) {#
+	            wid <- wid/2#
+	            if (notch) {#
+	                xx <- x + wid * c(-1, 1, 1, notch.frac, 1, 1,#
+	                  -1, -1, -notch.frac, -1)#
+	                yy <- c(stats[c(2, 2)], conf[1], stats[3], conf[2],#
+	                  stats[c(4, 4)], conf[2], stats[3], conf[1])#
+	            }#
+	            else {#
+	                xx <- x + wid * c(-1, 1, 1, -1)#
+	                yy <- stats[c(2, 2, 4, 4)]#
+	            }#
+	            if (!notch)#
+	                notch.frac <- 1#
+	            wntch <- notch.frac * wid#
+	            if (horizontal) {#
+	                polygon(yy, xx, col = col, border = border)#
+	                segments(stats[3], x - wntch, stats[3], x + wntch,#
+	                  col = border)#
+	                segments(stats[c(1, 5)], rep(x, 2), stats[c(2,#
+	                  4)], rep(x, 2), lty = 1, col = border)#
+	                segments(stats[c(1, 5)], rep(x - wid/2, 2), stats[c(1,#
+	                  5)], rep(x + wid/2, 2), col = border)#
+	                do.call("points", c(list(out, rep(x, length(out))),#
+	                  pt.pars))#
+	            }#
+	            else {#
+	                polygon(xx, yy, col = col, border = border)#
+	                segments(x - wntch, stats[3], x + wntch, stats[3],#
+	                  col = border)#
+	                segments(rep(x, 2), stats[c(1, 5)], rep(x, 2),#
+	                  stats[c(2, 4)], lty = 1, col = border)#
+	                segments(rep(x - wid/2, 2), stats[c(1, 5)], rep(x +#
+	                  wid/2, 2), stats[c(1, 5)], col = border)#
+	                do.call("points", c(list(rep(x, length(out)),#
+	                  out), pt.pars))#
+	            }#
+	            if (any(inf <- !is.finite(out))) {#
+	                warning(paste("Outlier (", paste(unique(out[inf]),#
+	                  collapse = ", "), ") in ", paste(x, c("st",#
+	                  "nd", "rd", "th")[pmin(4, x)], sep = ""), " boxplot are NOT drawn",#
+	                  sep = ""))#
+	            }#
+	        }#
+	    }#
+	    if (!is.list(z) || 0 == (n <- length(z$n)))#
+	        stop("invalid first argument")#
+	    if (is.null(at))#
+	        at <- 1:n#
+	    else if (length(at) != n)#
+	        stop(paste("`at' must have same length as `z $ n', i.e.",#
+	            n))#
+	    if (is.null(z$out))#
+	        z$out <- numeric()#
+	    if (is.null(z$group) || !outline)#
+	        z$group <- integer()#
+	    if (is.null(pars$ylim))#
+	        ylim <- range(z$stats[is.finite(z$stats)], z$out[is.finite(z$out)],#
+	            if (notch)#
+	                z$conf[is.finite(z$conf)])#
+	    else {#
+	        ylim <- pars$ylim#
+	        pars$ylim <- NULL#
+	    }#
+	    width <- if (!is.null(width)) {#
+	        if (length(width) != n | any(is.na(width)) | any(width <= 0))#
+	            stop("invalid boxplot widths")#
+	        boxwex * width/max(width)#
+	    }#
+	    else if (varwidth)#
+	        boxwex * sqrt(z$n/max(z$n))#
+	    else if (n == 1)#
+	        0.5 * boxwex#
+	    else rep(boxwex, n)#
+	    if (missing(border) || length(border) == 0)#
+	        border <- par("fg")#
+	    pt.pars <- c(pars[names(pars) %in% c("pch", "cex", "bg")],#
+	        col = border)#
+	    for (i in 1:n) bplt(at[i], wid = width[i], stats = z$stats[,#
+	        i], out = z$out[z$group == i], conf = z$conf[, i], notch = notch,#
+	        border = border[(i - 1)%%length(border) + 1], col = if (is.null(col))#
+	            col#
+	        else col[(i - 1)%%length(col) + 1], horizontal = horizontal)#
+	    invisible(at)#
+	}#
+#
+	# Calculate and plot residuals#
+	baselevels <- curves[agecurves %in% ages, 2]#
+	expfreqs <- expandFreq2(freqs)#
+	for (i in 1:length(baselevels))#
+		expfreqs[[i]] <- expfreqs[[i]] - baselevels[i]#
+	# Draw it#
+	par(mar = c(1, 4, 1, 2), lab = c(5, 3, 7))#
+	matplot(X, Y - Y[, 2], type = "l", xaxs = "i", xaxt = "n", lty = lty,#
+        col = 1, lwd = 2, bty = "l", xlim = xlim, ylim = c(-12, 20),#
+        ylab = ylab2,...)#
+	# Some options cannot be changed in the original boxplot function!#
+    # So, we use our own implementation here#
+	boxplot2(lapply(expfreqs, spreadCalc), col = "gray90", boxwex = boxwex,#
+        range = 0, add = TRUE, at = ages)#
+	# Draw tick marks for the X axis#
+	axis(1, labels = FALSE)#
+}#
+#
+#
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}#
+#
+freq1[,1]=seq(-100,1200,20)#
+freq2[,1]=seq(-100,1200,20)#
+#
+#
+rqFreqPlot(freq1, freqs1, barscale = .35, barcol = "gray90",#
+    boxwex = .15, xlim = c(0, 52), ylim = c(-120,1200), main = "",#
+    xlab = expression(paste(italic("t"), " (years)")),#
+    ylab1 = expression(paste(italic("D"), " (mm)")),#
+    ylab2 = expression(paste(Delta, italic("D"), " (mm)")), las = 1, lty = 1)#
+title("Sea urchin growth modeled using quantile regression")
+rm(list=ls())
+### A graph for presenting individual growth with time in a population with:#
+### Histograms of size distribution with time,#
+### Quantile regressions for the median and 5% / 95% percentiles,#
+### A graph quantile residuals using boxplots around the median model.#
+####
+### This graph is Fig. 2 of the paper: Grosjean, PH, Ch. Spirlet & M. Jangoux,#
+### 2003. A functional growth model with intraspecific competition applied to a#
+### sea urchin, Paracentrotus lividus. Can. J. Fish. Aquat. Sci., 60:237-246.#
+#
+### Requires two libraries and a couple of custom functions + an example dataset#
+library(stats)#
+library(quantreg)#
+#
+##### Custom functions required #####################################
+# Fuzzy-remanent growth curve with two different kinetic parameters#
+# passing by {0, 0}#
+# See Grosjean et al, 2003, Can. J. Fish. Aquat. Sci. 60:237-246,#
+# for definition and discussion of this growth model#
+fuzremOrig2 <- function (input, Asym, lrc1, lrc2, c0) {#
+    .expr1 <- exp(lrc1)#
+    .expr4 <- exp(-.expr1 * input)#
+    .expr5 <- 1 - .expr4#
+    .expr6 <- Asym * .expr5#
+    .expr7 <- exp(lrc2)#
+    .expr9 <- input - c0#
+    .expr11 <- exp(-.expr7 * .expr9)#
+    .expr12 <- 1 + .expr11#
+    .expr22 <- .expr12^2#
+    .value <- .expr6/.expr12#
+    .actualArgs <- as.list(match.call()[c("Asym", "lrc1", "lrc2", "c0")])#
+    if (all(unlist(lapply(.actualArgs, is.name)))) {#
+        .grad <- array(0, c(length(.value), 4),#
+            list(NULL, c("Asym", "lrc1", "lrc2", "c0")))#
+        .grad[, "Asym"] <- .expr5 / .expr12#
+        .grad[, "lrc1"] <- Asym * (.expr4 * (.expr1 * input)) / .expr12#
+        .grad[, "lrc2"] <- .expr6 * (.expr11 * (.expr7 * .expr9)) / .expr22#
+        .grad[, "c0"] <- -.expr6 * (.expr11 * .expr7) / .expr22#
+        dimnames(.grad) <- list(NULL, .actualArgs)#
+        attr(.value, "gradient") <- .grad#
+    }#
+    .value#
+}#
+# Self-starting function for fuzremOrig2#
+fuzremOrig2.ival <- function (mCall, data, LHS) {#
+    xy <- sortedXyData(mCall[["input"]], LHS, data)#
+    if (nrow(xy) < 5) {#
+        stop("Too few distinct input values to fit a fuzzy-remanent growth function with 2 kinetic parameter passing by {0, 0}")#
+    }#
+    xydata <- c(as.list(xy), c0 = NLSstClosestX(xy, mean(range(xy[["y"]]))))#
+    xydata <- as.list(xydata)#
+    options(show.error.messages = FALSE)#
+    # Sometimes, the following evaluation gives an error#
+    # (singular gradient, ...). Try another way to estimate initial parameters#
+    pars <- try(as.vector(coef(nls(y ~ (1 - exp(-exp(lrc) * x))/#
+        (1 + exp((c0 - x)*exp(lrc))), data = xydata, start = list(lrc = 0),#
+        algorithm = "plinear"))))#
+    if (!is.null(class(pars)) && class(pars) == "try-error") {#
+        cat("Using second alternative for initial parameters estimation\n")#
+        options(show.error.messages = TRUE)#
+        pars <- as.vector(coef(nls(y ~ SSlogis(x, Asym, xmid, scal),#
+            data = xydata)))#
+        xydata$c0 <- pars[2]#
+        pars[1] <- log(1/pars[3])#
+    } else { options(show.error.messages = TRUE)}#
+    pars <- as.vector(coef(nls(y ~ (1 - exp(-exp(lrc1) * x))/#
+        (1 + exp((c0 - x)*exp(lrc2))), data = data.frame(xy),#
+        start = list(c0 = xydata$c0, lrc1 = pars[1], lrc2 = pars[1]),#
+        algorithm = "plinear")))#
+    value <- c(pars[4], pars[2], pars[3], pars[1])#
+    names(value) <- mCall[c("Asym", "lrc1", "lrc2", "c0")]#
+    return(value)#
+}#
+# Self-Starting function, combining fuzremOrig2 and fuzremOrig2.ival#
+SSfuzremOrig2 <- selfStart(fuzremOrig2, fuzremOrig2.ival, para = "", template = "")#
+remove(fuzremOrig2, fuzremOrig2.ival)#
+attr(SSfuzremOrig2,"pnames") <- c("Asym", "lrc1", "lrc2", "c0")#
+#
+# Expand a "class"-"frequencies at time" data frame into#
+# a "time"-"mean size in class" data frame#
+expandFreq <- function(ages, freqs) {#
+	for (i in 2:ncol(freqs)){#
+		size <- rep(freqs[, 1], freqs[, i])#
+		age <- rep(ages[i-1], length(size))#
+		if (i == 2){#
+			res <- cbind(age, size)#
+		} else {#
+			res <- rbind(res, cbind(age, size))#
+		}#
+	}#
+	res <- as.data.frame(res)#
+	return(res)#
+}#
+#
+# Plot of size distributions, quantiles regressions and residuals diagnosis#
+# (boxplot) for curves tau = 0.05, 0.5 & 0.95 in the case of individual size#
+# distributions are known at each sampled time#
+rqFreqPlot <- function(ages, freqs, xlim = c(min(ages),#
+    max(ages)), ylim = c(min(curves), max(curves)), barscale = 100, barcol = 8,#
+    boxwex = 50, ylab1 = "", ylab2 = "", lty = c(2, 1, 2), ...) {#
+#
+	# Create a layout for the histograms and the boxplots#
+	nf <- layout(matrix(c(2,1),2,1,byrow = TRUE), widths = 7,#
+        heights = c(2, 5), respect = TRUE)#
+	layout.show(nf)#
+	par(mar = c(5, 4, 0, 2), lab = c(5, 5, 7))#
+#
+	# Draw the histograms#
+	for (i in 1:length(ages)){#
+		par(new = TRUE)#
+		xmin <- -ages[i] + xlim[1]#
+		xmax <- xlim[2] - ages[i]#
+		ser <- freqs[, i+1]#
+		ser <- ser/max(ser) * barscale#
+		barplot(ser, horiz = TRUE, axes = FALSE, xlim = c(xmin, xmax),#
+            ylim = ylim, col = barcol, space = 0)#
+	}#
+	# Add a residual analysis above the graph#
+	spreadCalc <- function(x, na.rm = FALSE){#
+		# Substract median from expanded frequencies data#
+		# And narrow range to 0.05 - 0.95 quantiles#
+		res <- x#
+		q <- quantile(res, c(0.05, 0.95), na.rm = na.rm)#
+		res[res < q[1]] <- q[1]#
+		res[res > q[2]] <- q[2]#
+		return(res)#
+	}#
+	## Expand one or several frequency columns into individual measurements#
+	expandFreq2 <- function(freqs) {#
+		# Consider mean size at each class for expanding the observations#
+		# with classes being first column and frequencies in each class#
+        # in the following columns#
+		# A list of vectors is returned#
+		res <- list(NULL)#
+		nCols <- ncol(freqs)#
+		for (i in 2:nCols)#
+			res[[i-1]] <- rep(freqs[, 1], freqs[, i])#
+		return(res)#
+	}#
+#
+	# A modified boxplot.default() function with different parameters#
+    # (no box around the graph and plain lines for hinges)#
+	boxplot2 <- function (x, ..., range = 1.5, width = NULL, varwidth = FALSE,#
+        notch = FALSE, outline = TRUE, names, boxwex = 0.8, plot = TRUE,#
+        border = par("fg"), col = NULL, log = "", pars = NULL,#
+        horizontal = FALSE, add = FALSE, at = NULL) {#
+	    args <- list(x, ...)#
+	    namedargs <- if (!is.null(attributes(args)$names))#
+	        attributes(args)$names != ""#
+	    else rep(FALSE, length = length(args))#
+	    pars <- c(args[namedargs], pars)#
+	    groups <- if (is.list(x))#
+	        x#
+	    else args[!namedargs]#
+	    if (0 == (n <- length(groups)))#
+	        stop("invalid first argument")#
+	    if (length(class(groups)))#
+	        groups <- unclass(groups)#
+	    if (!missing(names))#
+	        attr(groups, "names") <- names#
+	    else {#
+	        if (is.null(attr(groups, "names")))#
+	            attr(groups, "names") <- 1:n#
+	        names <- attr(groups, "names")#
+	    }#
+	    for (i in 1:n) groups[i] <- list(boxplot.stats(groups[[i]], range))#
+	    stats <- matrix(0, nr = 5, nc = n)#
+	    conf <- matrix(0, nr = 2, nc = n)#
+	    ng <- out <- group <- numeric(0)#
+	    ct <- 1#
+	    for (i in groups) {#
+	        stats[, ct] <- i$stats#
+	        conf[, ct] <- i$conf#
+	        ng <- c(ng, i$n)#
+	        if ((lo <- length(i$out))) {#
+	            out <- c(out, i$out)#
+	            group <- c(group, rep(ct, lo))#
+	        }#
+	        ct <- ct + 1#
+	    }#
+	    z <- list(stats = stats, n = ng, conf = conf, out = out, group = group, names = names)#
+	    if (plot) {#
+	        bxp2(z, width, varwidth = varwidth, notch = notch, boxwex = boxwex, border = border, col = col, log = log, pars = pars, outline = outline, horizontal = horizontal, add = add, at = at)#
+	        invisible(z)#
+	    }#
+	    else z#
+	}#
+#
+	# A modified bxp() function for plotting the boxplot generated by boxplot2()#
+	bxp2 <- function (z, notch = FALSE, width = NULL, varwidth = FALSE,#
+        outline = TRUE, notch.frac = 0.5, boxwex = 0.8, border = par("fg"),#
+        col = NULL, log = "", pars = NULL, frame.plot = axes,#
+        horizontal = FALSE, add = FALSE, at = NULL, show.names = NULL, ...) {#
+	    pars <- c(pars, list(...))#
+	    bplt <- function(x, wid, stats, out, conf, notch, border,#
+	        col, horizontal) {#
+	        if (!any(is.na(stats))) {#
+	            wid <- wid/2#
+	            if (notch) {#
+	                xx <- x + wid * c(-1, 1, 1, notch.frac, 1, 1,#
+	                  -1, -1, -notch.frac, -1)#
+	                yy <- c(stats[c(2, 2)], conf[1], stats[3], conf[2],#
+	                  stats[c(4, 4)], conf[2], stats[3], conf[1])#
+	            }#
+	            else {#
+	                xx <- x + wid * c(-1, 1, 1, -1)#
+	                yy <- stats[c(2, 2, 4, 4)]#
+	            }#
+	            if (!notch)#
+	                notch.frac <- 1#
+	            wntch <- notch.frac * wid#
+	            if (horizontal) {#
+	                polygon(yy, xx, col = col, border = border)#
+	                segments(stats[3], x - wntch, stats[3], x + wntch,#
+	                  col = border)#
+	                segments(stats[c(1, 5)], rep(x, 2), stats[c(2,#
+	                  4)], rep(x, 2), lty = 1, col = border)#
+	                segments(stats[c(1, 5)], rep(x - wid/2, 2), stats[c(1,#
+	                  5)], rep(x + wid/2, 2), col = border)#
+	                do.call("points", c(list(out, rep(x, length(out))),#
+	                  pt.pars))#
+	            }#
+	            else {#
+	                polygon(xx, yy, col = col, border = border)#
+	                segments(x - wntch, stats[3], x + wntch, stats[3],#
+	                  col = border)#
+	                segments(rep(x, 2), stats[c(1, 5)], rep(x, 2),#
+	                  stats[c(2, 4)], lty = 1, col = border)#
+	                segments(rep(x - wid/2, 2), stats[c(1, 5)], rep(x +#
+	                  wid/2, 2), stats[c(1, 5)], col = border)#
+	                do.call("points", c(list(rep(x, length(out)),#
+	                  out), pt.pars))#
+	            }#
+	            if (any(inf <- !is.finite(out))) {#
+	                warning(paste("Outlier (", paste(unique(out[inf]),#
+	                  collapse = ", "), ") in ", paste(x, c("st",#
+	                  "nd", "rd", "th")[pmin(4, x)], sep = ""), " boxplot are NOT drawn",#
+	                  sep = ""))#
+	            }#
+	        }#
+	    }#
+	    if (!is.list(z) || 0 == (n <- length(z$n)))#
+	        stop("invalid first argument")#
+	    if (is.null(at))#
+	        at <- 1:n#
+	    else if (length(at) != n)#
+	        stop(paste("`at' must have same length as `z $ n', i.e.",#
+	            n))#
+	    if (is.null(z$out))#
+	        z$out <- numeric()#
+	    if (is.null(z$group) || !outline)#
+	        z$group <- integer()#
+	    if (is.null(pars$ylim))#
+	        ylim <- range(z$stats[is.finite(z$stats)], z$out[is.finite(z$out)],#
+	            if (notch)#
+	                z$conf[is.finite(z$conf)])#
+	    else {#
+	        ylim <- pars$ylim#
+	        pars$ylim <- NULL#
+	    }#
+	    width <- if (!is.null(width)) {#
+	        if (length(width) != n | any(is.na(width)) | any(width <= 0))#
+	            stop("invalid boxplot widths")#
+	        boxwex * width/max(width)#
+	    }#
+	    else if (varwidth)#
+	        boxwex * sqrt(z$n/max(z$n))#
+	    else if (n == 1)#
+	        0.5 * boxwex#
+	    else rep(boxwex, n)#
+	    if (missing(border) || length(border) == 0)#
+	        border <- par("fg")#
+	    pt.pars <- c(pars[names(pars) %in% c("pch", "cex", "bg")],#
+	        col = border)#
+	    for (i in 1:n) bplt(at[i], wid = width[i], stats = z$stats[,#
+	        i], out = z$out[z$group == i], conf = z$conf[, i], notch = notch,#
+	        border = border[(i - 1)%%length(border) + 1], col = if (is.null(col))#
+	            col#
+	        else col[(i - 1)%%length(col) + 1], horizontal = horizontal)#
+	    invisible(at)#
+	}#
+#
+	# Calculate and plot residuals#
+	baselevels <- curves[agecurves %in% ages, 2]#
+	expfreqs <- expandFreq2(freqs)#
+	for (i in 1:length(baselevels))#
+		expfreqs[[i]] <- expfreqs[[i]] - baselevels[i]#
+	# Draw it#
+	par(mar = c(1, 4, 1, 2), lab = c(5, 3, 7))#
+	matplot(X, Y - Y[, 2], type = "l", xaxs = "i", xaxt = "n", lty = lty,#
+        col = 1, lwd = 2, bty = "l", xlim = xlim, ylim = c(-12, 20),#
+        ylab = ylab2,...)#
+	# Some options cannot be changed in the original boxplot function!#
+    # So, we use our own implementation here#
+	boxplot2(lapply(expfreqs, spreadCalc), col = "gray90", boxwex = boxwex,#
+        range = 0, add = TRUE, at = ages)#
+	# Draw tick marks for the X axis#
+	axis(1, labels = FALSE)#
+}#
+#
+#
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}#
+#
+freq1[,1]=seq(-100,1200,20)#
+freq2[,1]=seq(-100,1200,20)#
+times=seq(0:50)#
+#
+#
+rqFreqPlot(times, freq1, barscale = .35, barcol = "gray90",#
+    boxwex = .15, xlim = c(0, 52), ylim = c(-120,1200), main = "",#
+    xlab = expression(paste(italic("t"), " (years)")),#
+    ylab1 = expression(paste(italic("D"), " (mm)")),#
+    ylab2 = expression(paste(Delta, italic("D"), " (mm)")), las = 1, lty = 1)#
+title("Sea urchin growth modeled using quantile regression")
+rm(list=ls())
+### A graph for presenting individual growth with time in a population with:#
+### Histograms of size distribution with time,#
+### Quantile regressions for the median and 5% / 95% percentiles,#
+### A graph quantile residuals using boxplots around the median model.#
+####
+### This graph is Fig. 2 of the paper: Grosjean, PH, Ch. Spirlet & M. Jangoux,#
+### 2003. A functional growth model with intraspecific competition applied to a#
+### sea urchin, Paracentrotus lividus. Can. J. Fish. Aquat. Sci., 60:237-246.#
+#
+### Requires two libraries and a couple of custom functions + an example dataset#
+library(stats)#
+library(quantreg)#
+#
+##### Custom functions required #####################################
+# Fuzzy-remanent growth curve with two different kinetic parameters#
+# passing by {0, 0}#
+# See Grosjean et al, 2003, Can. J. Fish. Aquat. Sci. 60:237-246,#
+# for definition and discussion of this growth model#
+fuzremOrig2 <- function (input, Asym, lrc1, lrc2, c0) {#
+    .expr1 <- exp(lrc1)#
+    .expr4 <- exp(-.expr1 * input)#
+    .expr5 <- 1 - .expr4#
+    .expr6 <- Asym * .expr5#
+    .expr7 <- exp(lrc2)#
+    .expr9 <- input - c0#
+    .expr11 <- exp(-.expr7 * .expr9)#
+    .expr12 <- 1 + .expr11#
+    .expr22 <- .expr12^2#
+    .value <- .expr6/.expr12#
+    .actualArgs <- as.list(match.call()[c("Asym", "lrc1", "lrc2", "c0")])#
+    if (all(unlist(lapply(.actualArgs, is.name)))) {#
+        .grad <- array(0, c(length(.value), 4),#
+            list(NULL, c("Asym", "lrc1", "lrc2", "c0")))#
+        .grad[, "Asym"] <- .expr5 / .expr12#
+        .grad[, "lrc1"] <- Asym * (.expr4 * (.expr1 * input)) / .expr12#
+        .grad[, "lrc2"] <- .expr6 * (.expr11 * (.expr7 * .expr9)) / .expr22#
+        .grad[, "c0"] <- -.expr6 * (.expr11 * .expr7) / .expr22#
+        dimnames(.grad) <- list(NULL, .actualArgs)#
+        attr(.value, "gradient") <- .grad#
+    }#
+    .value#
+}#
+# Self-starting function for fuzremOrig2#
+fuzremOrig2.ival <- function (mCall, data, LHS) {#
+    xy <- sortedXyData(mCall[["input"]], LHS, data)#
+    if (nrow(xy) < 5) {#
+        stop("Too few distinct input values to fit a fuzzy-remanent growth function with 2 kinetic parameter passing by {0, 0}")#
+    }#
+    xydata <- c(as.list(xy), c0 = NLSstClosestX(xy, mean(range(xy[["y"]]))))#
+    xydata <- as.list(xydata)#
+    options(show.error.messages = FALSE)#
+    # Sometimes, the following evaluation gives an error#
+    # (singular gradient, ...). Try another way to estimate initial parameters#
+    pars <- try(as.vector(coef(nls(y ~ (1 - exp(-exp(lrc) * x))/#
+        (1 + exp((c0 - x)*exp(lrc))), data = xydata, start = list(lrc = 0),#
+        algorithm = "plinear"))))#
+    if (!is.null(class(pars)) && class(pars) == "try-error") {#
+        cat("Using second alternative for initial parameters estimation\n")#
+        options(show.error.messages = TRUE)#
+        pars <- as.vector(coef(nls(y ~ SSlogis(x, Asym, xmid, scal),#
+            data = xydata)))#
+        xydata$c0 <- pars[2]#
+        pars[1] <- log(1/pars[3])#
+    } else { options(show.error.messages = TRUE)}#
+    pars <- as.vector(coef(nls(y ~ (1 - exp(-exp(lrc1) * x))/#
+        (1 + exp((c0 - x)*exp(lrc2))), data = data.frame(xy),#
+        start = list(c0 = xydata$c0, lrc1 = pars[1], lrc2 = pars[1]),#
+        algorithm = "plinear")))#
+    value <- c(pars[4], pars[2], pars[3], pars[1])#
+    names(value) <- mCall[c("Asym", "lrc1", "lrc2", "c0")]#
+    return(value)#
+}#
+# Self-Starting function, combining fuzremOrig2 and fuzremOrig2.ival#
+SSfuzremOrig2 <- selfStart(fuzremOrig2, fuzremOrig2.ival, para = "", template = "")#
+remove(fuzremOrig2, fuzremOrig2.ival)#
+attr(SSfuzremOrig2,"pnames") <- c("Asym", "lrc1", "lrc2", "c0")#
+#
+# Expand a "class"-"frequencies at time" data frame into#
+# a "time"-"mean size in class" data frame#
+expandFreq <- function(ages, freqs) {#
+	for (i in 2:ncol(freqs)){#
+		size <- rep(freqs[, 1], freqs[, i])#
+		age <- rep(ages[i-1], length(size))#
+		if (i == 2){#
+			res <- cbind(age, size)#
+		} else {#
+			res <- rbind(res, cbind(age, size))#
+		}#
+	}#
+	res <- as.data.frame(res)#
+	return(res)#
+}#
+#
+# Plot of size distributions, quantiles regressions and residuals diagnosis#
+# (boxplot) for curves tau = 0.05, 0.5 & 0.95 in the case of individual size#
+# distributions are known at each sampled time#
+rqFreqPlot <- function(ages, freqs, xlim = c(min(ages),#
+    max(ages)), barscale = 100, barcol = 8,#
+    boxwex = 50, ylab1 = "", ylab2 = "", lty = c(2, 1, 2), ...) {#
+#
+	# Create a layout for the histograms and the boxplots#
+	nf <- layout(matrix(c(2,1),2,1,byrow = TRUE), widths = 7,#
+        heights = c(2, 5), respect = TRUE)#
+	layout.show(nf)#
+	par(mar = c(5, 4, 0, 2), lab = c(5, 5, 7))#
+#
+	# Draw the histograms#
+	for (i in 1:length(ages)){#
+		par(new = TRUE)#
+		xmin <- -ages[i] + xlim[1]#
+		xmax <- xlim[2] - ages[i]#
+		ser <- freqs[, i+1]#
+		ser <- ser/max(ser) * barscale#
+		barplot(ser, horiz = TRUE, axes = FALSE, xlim = c(xmin, xmax),#
+            ylim = ylim, col = barcol, space = 0)#
+	}#
+	# Add a residual analysis above the graph#
+	spreadCalc <- function(x, na.rm = FALSE){#
+		# Substract median from expanded frequencies data#
+		# And narrow range to 0.05 - 0.95 quantiles#
+		res <- x#
+		q <- quantile(res, c(0.05, 0.95), na.rm = na.rm)#
+		res[res < q[1]] <- q[1]#
+		res[res > q[2]] <- q[2]#
+		return(res)#
+	}#
+	## Expand one or several frequency columns into individual measurements#
+	expandFreq2 <- function(freqs) {#
+		# Consider mean size at each class for expanding the observations#
+		# with classes being first column and frequencies in each class#
+        # in the following columns#
+		# A list of vectors is returned#
+		res <- list(NULL)#
+		nCols <- ncol(freqs)#
+		for (i in 2:nCols)#
+			res[[i-1]] <- rep(freqs[, 1], freqs[, i])#
+		return(res)#
+	}#
+#
+	# A modified boxplot.default() function with different parameters#
+    # (no box around the graph and plain lines for hinges)#
+	boxplot2 <- function (x, ..., range = 1.5, width = NULL, varwidth = FALSE,#
+        notch = FALSE, outline = TRUE, names, boxwex = 0.8, plot = TRUE,#
+        border = par("fg"), col = NULL, log = "", pars = NULL,#
+        horizontal = FALSE, add = FALSE, at = NULL) {#
+	    args <- list(x, ...)#
+	    namedargs <- if (!is.null(attributes(args)$names))#
+	        attributes(args)$names != ""#
+	    else rep(FALSE, length = length(args))#
+	    pars <- c(args[namedargs], pars)#
+	    groups <- if (is.list(x))#
+	        x#
+	    else args[!namedargs]#
+	    if (0 == (n <- length(groups)))#
+	        stop("invalid first argument")#
+	    if (length(class(groups)))#
+	        groups <- unclass(groups)#
+	    if (!missing(names))#
+	        attr(groups, "names") <- names#
+	    else {#
+	        if (is.null(attr(groups, "names")))#
+	            attr(groups, "names") <- 1:n#
+	        names <- attr(groups, "names")#
+	    }#
+	    for (i in 1:n) groups[i] <- list(boxplot.stats(groups[[i]], range))#
+	    stats <- matrix(0, nr = 5, nc = n)#
+	    conf <- matrix(0, nr = 2, nc = n)#
+	    ng <- out <- group <- numeric(0)#
+	    ct <- 1#
+	    for (i in groups) {#
+	        stats[, ct] <- i$stats#
+	        conf[, ct] <- i$conf#
+	        ng <- c(ng, i$n)#
+	        if ((lo <- length(i$out))) {#
+	            out <- c(out, i$out)#
+	            group <- c(group, rep(ct, lo))#
+	        }#
+	        ct <- ct + 1#
+	    }#
+	    z <- list(stats = stats, n = ng, conf = conf, out = out, group = group, names = names)#
+	    if (plot) {#
+	        bxp2(z, width, varwidth = varwidth, notch = notch, boxwex = boxwex, border = border, col = col, log = log, pars = pars, outline = outline, horizontal = horizontal, add = add, at = at)#
+	        invisible(z)#
+	    }#
+	    else z#
+	}#
+#
+	# A modified bxp() function for plotting the boxplot generated by boxplot2()#
+	bxp2 <- function (z, notch = FALSE, width = NULL, varwidth = FALSE,#
+        outline = TRUE, notch.frac = 0.5, boxwex = 0.8, border = par("fg"),#
+        col = NULL, log = "", pars = NULL, frame.plot = axes,#
+        horizontal = FALSE, add = FALSE, at = NULL, show.names = NULL, ...) {#
+	    pars <- c(pars, list(...))#
+	    bplt <- function(x, wid, stats, out, conf, notch, border,#
+	        col, horizontal) {#
+	        if (!any(is.na(stats))) {#
+	            wid <- wid/2#
+	            if (notch) {#
+	                xx <- x + wid * c(-1, 1, 1, notch.frac, 1, 1,#
+	                  -1, -1, -notch.frac, -1)#
+	                yy <- c(stats[c(2, 2)], conf[1], stats[3], conf[2],#
+	                  stats[c(4, 4)], conf[2], stats[3], conf[1])#
+	            }#
+	            else {#
+	                xx <- x + wid * c(-1, 1, 1, -1)#
+	                yy <- stats[c(2, 2, 4, 4)]#
+	            }#
+	            if (!notch)#
+	                notch.frac <- 1#
+	            wntch <- notch.frac * wid#
+	            if (horizontal) {#
+	                polygon(yy, xx, col = col, border = border)#
+	                segments(stats[3], x - wntch, stats[3], x + wntch,#
+	                  col = border)#
+	                segments(stats[c(1, 5)], rep(x, 2), stats[c(2,#
+	                  4)], rep(x, 2), lty = 1, col = border)#
+	                segments(stats[c(1, 5)], rep(x - wid/2, 2), stats[c(1,#
+	                  5)], rep(x + wid/2, 2), col = border)#
+	                do.call("points", c(list(out, rep(x, length(out))),#
+	                  pt.pars))#
+	            }#
+	            else {#
+	                polygon(xx, yy, col = col, border = border)#
+	                segments(x - wntch, stats[3], x + wntch, stats[3],#
+	                  col = border)#
+	                segments(rep(x, 2), stats[c(1, 5)], rep(x, 2),#
+	                  stats[c(2, 4)], lty = 1, col = border)#
+	                segments(rep(x - wid/2, 2), stats[c(1, 5)], rep(x +#
+	                  wid/2, 2), stats[c(1, 5)], col = border)#
+	                do.call("points", c(list(rep(x, length(out)),#
+	                  out), pt.pars))#
+	            }#
+	            if (any(inf <- !is.finite(out))) {#
+	                warning(paste("Outlier (", paste(unique(out[inf]),#
+	                  collapse = ", "), ") in ", paste(x, c("st",#
+	                  "nd", "rd", "th")[pmin(4, x)], sep = ""), " boxplot are NOT drawn",#
+	                  sep = ""))#
+	            }#
+	        }#
+	    }#
+	    if (!is.list(z) || 0 == (n <- length(z$n)))#
+	        stop("invalid first argument")#
+	    if (is.null(at))#
+	        at <- 1:n#
+	    else if (length(at) != n)#
+	        stop(paste("`at' must have same length as `z $ n', i.e.",#
+	            n))#
+	    if (is.null(z$out))#
+	        z$out <- numeric()#
+	    if (is.null(z$group) || !outline)#
+	        z$group <- integer()#
+	    if (is.null(pars$ylim))#
+	        ylim <- range(z$stats[is.finite(z$stats)], z$out[is.finite(z$out)],#
+	            if (notch)#
+	                z$conf[is.finite(z$conf)])#
+	    else {#
+	        ylim <- pars$ylim#
+	        pars$ylim <- NULL#
+	    }#
+	    width <- if (!is.null(width)) {#
+	        if (length(width) != n | any(is.na(width)) | any(width <= 0))#
+	            stop("invalid boxplot widths")#
+	        boxwex * width/max(width)#
+	    }#
+	    else if (varwidth)#
+	        boxwex * sqrt(z$n/max(z$n))#
+	    else if (n == 1)#
+	        0.5 * boxwex#
+	    else rep(boxwex, n)#
+	    if (missing(border) || length(border) == 0)#
+	        border <- par("fg")#
+	    pt.pars <- c(pars[names(pars) %in% c("pch", "cex", "bg")],#
+	        col = border)#
+	    for (i in 1:n) bplt(at[i], wid = width[i], stats = z$stats[,#
+	        i], out = z$out[z$group == i], conf = z$conf[, i], notch = notch,#
+	        border = border[(i - 1)%%length(border) + 1], col = if (is.null(col))#
+	            col#
+	        else col[(i - 1)%%length(col) + 1], horizontal = horizontal)#
+	    invisible(at)#
+	}#
+#
+	# Calculate and plot residuals#
+	baselevels <- curves[agecurves %in% ages, 2]#
+	expfreqs <- expandFreq2(freqs)#
+	for (i in 1:length(baselevels))#
+		expfreqs[[i]] <- expfreqs[[i]] - baselevels[i]#
+	# Draw it#
+	par(mar = c(1, 4, 1, 2), lab = c(5, 3, 7))#
+	matplot(X, Y - Y[, 2], type = "l", xaxs = "i", xaxt = "n", lty = lty,#
+        col = 1, lwd = 2, bty = "l", xlim = xlim, ylim = c(-12, 20),#
+        ylab = ylab2,...)#
+	# Some options cannot be changed in the original boxplot function!#
+    # So, we use our own implementation here#
+	boxplot2(lapply(expfreqs, spreadCalc), col = "gray90", boxwex = boxwex,#
+        range = 0, add = TRUE, at = ages)#
+	# Draw tick marks for the X axis#
+	axis(1, labels = FALSE)#
+}#
+#
+#
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}#
+#
+freq1[,1]=seq(-100,1200,20)#
+freq2[,1]=seq(-100,1200,20)#
+times=seq(0:50)#
+#
+#
+rqFreqPlot(times, freq1, barscale = .35, barcol = "gray90",#
+    boxwex = .15, xlim = c(0, 52), ylim = c(-120,1200), main = "",#
+    xlab = expression(paste(italic("t"), " (years)")),#
+    ylab1 = expression(paste(italic("D"), " (mm)")),#
+    ylab2 = expression(paste(Delta, italic("D"), " (mm)")), las = 1, lty = 1)#
+title("Sea urchin growth modeled using quantile regression")
+rm(list=ls())
+### A graph for presenting individual growth with time in a population with:#
+### Histograms of size distribution with time,#
+### Quantile regressions for the median and 5% / 95% percentiles,#
+### A graph quantile residuals using boxplots around the median model.#
+####
+### This graph is Fig. 2 of the paper: Grosjean, PH, Ch. Spirlet & M. Jangoux,#
+### 2003. A functional growth model with intraspecific competition applied to a#
+### sea urchin, Paracentrotus lividus. Can. J. Fish. Aquat. Sci., 60:237-246.#
+#
+### Requires two libraries and a couple of custom functions + an example dataset#
+library(stats)#
+library(quantreg)#
+#
+##### Custom functions required #####################################
+# Fuzzy-remanent growth curve with two different kinetic parameters#
+# passing by {0, 0}#
+# See Grosjean et al, 2003, Can. J. Fish. Aquat. Sci. 60:237-246,#
+# for definition and discussion of this growth model#
+fuzremOrig2 <- function (input, Asym, lrc1, lrc2, c0) {#
+    .expr1 <- exp(lrc1)#
+    .expr4 <- exp(-.expr1 * input)#
+    .expr5 <- 1 - .expr4#
+    .expr6 <- Asym * .expr5#
+    .expr7 <- exp(lrc2)#
+    .expr9 <- input - c0#
+    .expr11 <- exp(-.expr7 * .expr9)#
+    .expr12 <- 1 + .expr11#
+    .expr22 <- .expr12^2#
+    .value <- .expr6/.expr12#
+    .actualArgs <- as.list(match.call()[c("Asym", "lrc1", "lrc2", "c0")])#
+    if (all(unlist(lapply(.actualArgs, is.name)))) {#
+        .grad <- array(0, c(length(.value), 4),#
+            list(NULL, c("Asym", "lrc1", "lrc2", "c0")))#
+        .grad[, "Asym"] <- .expr5 / .expr12#
+        .grad[, "lrc1"] <- Asym * (.expr4 * (.expr1 * input)) / .expr12#
+        .grad[, "lrc2"] <- .expr6 * (.expr11 * (.expr7 * .expr9)) / .expr22#
+        .grad[, "c0"] <- -.expr6 * (.expr11 * .expr7) / .expr22#
+        dimnames(.grad) <- list(NULL, .actualArgs)#
+        attr(.value, "gradient") <- .grad#
+    }#
+    .value#
+}#
+# Self-starting function for fuzremOrig2#
+fuzremOrig2.ival <- function (mCall, data, LHS) {#
+    xy <- sortedXyData(mCall[["input"]], LHS, data)#
+    if (nrow(xy) < 5) {#
+        stop("Too few distinct input values to fit a fuzzy-remanent growth function with 2 kinetic parameter passing by {0, 0}")#
+    }#
+    xydata <- c(as.list(xy), c0 = NLSstClosestX(xy, mean(range(xy[["y"]]))))#
+    xydata <- as.list(xydata)#
+    options(show.error.messages = FALSE)#
+    # Sometimes, the following evaluation gives an error#
+    # (singular gradient, ...). Try another way to estimate initial parameters#
+    pars <- try(as.vector(coef(nls(y ~ (1 - exp(-exp(lrc) * x))/#
+        (1 + exp((c0 - x)*exp(lrc))), data = xydata, start = list(lrc = 0),#
+        algorithm = "plinear"))))#
+    if (!is.null(class(pars)) && class(pars) == "try-error") {#
+        cat("Using second alternative for initial parameters estimation\n")#
+        options(show.error.messages = TRUE)#
+        pars <- as.vector(coef(nls(y ~ SSlogis(x, Asym, xmid, scal),#
+            data = xydata)))#
+        xydata$c0 <- pars[2]#
+        pars[1] <- log(1/pars[3])#
+    } else { options(show.error.messages = TRUE)}#
+    pars <- as.vector(coef(nls(y ~ (1 - exp(-exp(lrc1) * x))/#
+        (1 + exp((c0 - x)*exp(lrc2))), data = data.frame(xy),#
+        start = list(c0 = xydata$c0, lrc1 = pars[1], lrc2 = pars[1]),#
+        algorithm = "plinear")))#
+    value <- c(pars[4], pars[2], pars[3], pars[1])#
+    names(value) <- mCall[c("Asym", "lrc1", "lrc2", "c0")]#
+    return(value)#
+}#
+# Self-Starting function, combining fuzremOrig2 and fuzremOrig2.ival#
+SSfuzremOrig2 <- selfStart(fuzremOrig2, fuzremOrig2.ival, para = "", template = "")#
+remove(fuzremOrig2, fuzremOrig2.ival)#
+attr(SSfuzremOrig2,"pnames") <- c("Asym", "lrc1", "lrc2", "c0")#
+#
+# Expand a "class"-"frequencies at time" data frame into#
+# a "time"-"mean size in class" data frame#
+expandFreq <- function(ages, freqs) {#
+	for (i in 2:ncol(freqs)){#
+		size <- rep(freqs[, 1], freqs[, i])#
+		age <- rep(ages[i-1], length(size))#
+		if (i == 2){#
+			res <- cbind(age, size)#
+		} else {#
+			res <- rbind(res, cbind(age, size))#
+		}#
+	}#
+	res <- as.data.frame(res)#
+	return(res)#
+}#
+#
+# Plot of size distributions, quantiles regressions and residuals diagnosis#
+# (boxplot) for curves tau = 0.05, 0.5 & 0.95 in the case of individual size#
+# distributions are known at each sampled time#
+rqFreqPlot <- function(ages, freq, freqs xlim = c(min(ages),#
+    max(ages)), ylim=c(min(freqs),max(freqs)), barscale = 100, barcol = 8,#
+    boxwex = 50, ylab1 = "", ylab2 = "", lty = c(2, 1, 2), ...) {#
+#
+	# Create a layout for the histograms and the boxplots#
+	nf <- layout(matrix(c(2,1),2,1,byrow = TRUE), widths = 7,#
+        heights = c(2, 5), respect = TRUE)#
+	layout.show(nf)#
+	par(mar = c(5, 4, 0, 2), lab = c(5, 5, 7))#
+#
+	# Draw the histograms#
+	for (i in 1:length(ages)){#
+		par(new = TRUE)#
+		xmin <- -ages[i] + xlim[1]#
+		xmax <- xlim[2] - ages[i]#
+		ser <- freqs[, i+1]#
+		ser <- ser/max(ser) * barscale#
+		barplot(ser, horiz = TRUE, axes = FALSE, xlim = c(xmin, xmax),#
+            ylim = ylim, col = barcol, space = 0)#
+	}#
+	# Add a residual analysis above the graph#
+	spreadCalc <- function(x, na.rm = FALSE){#
+		# Substract median from expanded frequencies data#
+		# And narrow range to 0.05 - 0.95 quantiles#
+		res <- x#
+		q <- quantile(res, c(0.05, 0.95), na.rm = na.rm)#
+		res[res < q[1]] <- q[1]#
+		res[res > q[2]] <- q[2]#
+		return(res)#
+	}#
+	## Expand one or several frequency columns into individual measurements#
+	expandFreq2 <- function(freqs) {#
+		# Consider mean size at each class for expanding the observations#
+		# with classes being first column and frequencies in each class#
+        # in the following columns#
+		# A list of vectors is returned#
+		res <- list(NULL)#
+		nCols <- ncol(freqs)#
+		for (i in 2:nCols)#
+			res[[i-1]] <- rep(freqs[, 1], freqs[, i])#
+		return(res)#
+	}#
+#
+	# A modified boxplot.default() function with different parameters#
+    # (no box around the graph and plain lines for hinges)#
+	boxplot2 <- function (x, ..., range = 1.5, width = NULL, varwidth = FALSE,#
+        notch = FALSE, outline = TRUE, names, boxwex = 0.8, plot = TRUE,#
+        border = par("fg"), col = NULL, log = "", pars = NULL,#
+        horizontal = FALSE, add = FALSE, at = NULL) {#
+	    args <- list(x, ...)#
+	    namedargs <- if (!is.null(attributes(args)$names))#
+	        attributes(args)$names != ""#
+	    else rep(FALSE, length = length(args))#
+	    pars <- c(args[namedargs], pars)#
+	    groups <- if (is.list(x))#
+	        x#
+	    else args[!namedargs]#
+	    if (0 == (n <- length(groups)))#
+	        stop("invalid first argument")#
+	    if (length(class(groups)))#
+	        groups <- unclass(groups)#
+	    if (!missing(names))#
+	        attr(groups, "names") <- names#
+	    else {#
+	        if (is.null(attr(groups, "names")))#
+	            attr(groups, "names") <- 1:n#
+	        names <- attr(groups, "names")#
+	    }#
+	    for (i in 1:n) groups[i] <- list(boxplot.stats(groups[[i]], range))#
+	    stats <- matrix(0, nr = 5, nc = n)#
+	    conf <- matrix(0, nr = 2, nc = n)#
+	    ng <- out <- group <- numeric(0)#
+	    ct <- 1#
+	    for (i in groups) {#
+	        stats[, ct] <- i$stats#
+	        conf[, ct] <- i$conf#
+	        ng <- c(ng, i$n)#
+	        if ((lo <- length(i$out))) {#
+	            out <- c(out, i$out)#
+	            group <- c(group, rep(ct, lo))#
+	        }#
+	        ct <- ct + 1#
+	    }#
+	    z <- list(stats = stats, n = ng, conf = conf, out = out, group = group, names = names)#
+	    if (plot) {#
+	        bxp2(z, width, varwidth = varwidth, notch = notch, boxwex = boxwex, border = border, col = col, log = log, pars = pars, outline = outline, horizontal = horizontal, add = add, at = at)#
+	        invisible(z)#
+	    }#
+	    else z#
+	}#
+#
+	# A modified bxp() function for plotting the boxplot generated by boxplot2()#
+	bxp2 <- function (z, notch = FALSE, width = NULL, varwidth = FALSE,#
+        outline = TRUE, notch.frac = 0.5, boxwex = 0.8, border = par("fg"),#
+        col = NULL, log = "", pars = NULL, frame.plot = axes,#
+        horizontal = FALSE, add = FALSE, at = NULL, show.names = NULL, ...) {#
+	    pars <- c(pars, list(...))#
+	    bplt <- function(x, wid, stats, out, conf, notch, border,#
+	        col, horizontal) {#
+	        if (!any(is.na(stats))) {#
+	            wid <- wid/2#
+	            if (notch) {#
+	                xx <- x + wid * c(-1, 1, 1, notch.frac, 1, 1,#
+	                  -1, -1, -notch.frac, -1)#
+	                yy <- c(stats[c(2, 2)], conf[1], stats[3], conf[2],#
+	                  stats[c(4, 4)], conf[2], stats[3], conf[1])#
+	            }#
+	            else {#
+	                xx <- x + wid * c(-1, 1, 1, -1)#
+	                yy <- stats[c(2, 2, 4, 4)]#
+	            }#
+	            if (!notch)#
+	                notch.frac <- 1#
+	            wntch <- notch.frac * wid#
+	            if (horizontal) {#
+	                polygon(yy, xx, col = col, border = border)#
+	                segments(stats[3], x - wntch, stats[3], x + wntch,#
+	                  col = border)#
+	                segments(stats[c(1, 5)], rep(x, 2), stats[c(2,#
+	                  4)], rep(x, 2), lty = 1, col = border)#
+	                segments(stats[c(1, 5)], rep(x - wid/2, 2), stats[c(1,#
+	                  5)], rep(x + wid/2, 2), col = border)#
+	                do.call("points", c(list(out, rep(x, length(out))),#
+	                  pt.pars))#
+	            }#
+	            else {#
+	                polygon(xx, yy, col = col, border = border)#
+	                segments(x - wntch, stats[3], x + wntch, stats[3],#
+	                  col = border)#
+	                segments(rep(x, 2), stats[c(1, 5)], rep(x, 2),#
+	                  stats[c(2, 4)], lty = 1, col = border)#
+	                segments(rep(x - wid/2, 2), stats[c(1, 5)], rep(x +#
+	                  wid/2, 2), stats[c(1, 5)], col = border)#
+	                do.call("points", c(list(rep(x, length(out)),#
+	                  out), pt.pars))#
+	            }#
+	            if (any(inf <- !is.finite(out))) {#
+	                warning(paste("Outlier (", paste(unique(out[inf]),#
+	                  collapse = ", "), ") in ", paste(x, c("st",#
+	                  "nd", "rd", "th")[pmin(4, x)], sep = ""), " boxplot are NOT drawn",#
+	                  sep = ""))#
+	            }#
+	        }#
+	    }#
+	    if (!is.list(z) || 0 == (n <- length(z$n)))#
+	        stop("invalid first argument")#
+	    if (is.null(at))#
+	        at <- 1:n#
+	    else if (length(at) != n)#
+	        stop(paste("`at' must have same length as `z $ n', i.e.",#
+	            n))#
+	    if (is.null(z$out))#
+	        z$out <- numeric()#
+	    if (is.null(z$group) || !outline)#
+	        z$group <- integer()#
+	    if (is.null(pars$ylim))#
+	        ylim <- range(z$stats[is.finite(z$stats)], z$out[is.finite(z$out)],#
+	            if (notch)#
+	                z$conf[is.finite(z$conf)])#
+	    else {#
+	        ylim <- pars$ylim#
+	        pars$ylim <- NULL#
+	    }#
+	    width <- if (!is.null(width)) {#
+	        if (length(width) != n | any(is.na(width)) | any(width <= 0))#
+	            stop("invalid boxplot widths")#
+	        boxwex * width/max(width)#
+	    }#
+	    else if (varwidth)#
+	        boxwex * sqrt(z$n/max(z$n))#
+	    else if (n == 1)#
+	        0.5 * boxwex#
+	    else rep(boxwex, n)#
+	    if (missing(border) || length(border) == 0)#
+	        border <- par("fg")#
+	    pt.pars <- c(pars[names(pars) %in% c("pch", "cex", "bg")],#
+	        col = border)#
+	    for (i in 1:n) bplt(at[i], wid = width[i], stats = z$stats[,#
+	        i], out = z$out[z$group == i], conf = z$conf[, i], notch = notch,#
+	        border = border[(i - 1)%%length(border) + 1], col = if (is.null(col))#
+	            col#
+	        else col[(i - 1)%%length(col) + 1], horizontal = horizontal)#
+	    invisible(at)#
+	}#
+#
+	# Calculate and plot residuals#
+	baselevels <- curves[agecurves %in% ages, 2]#
+	expfreqs <- expandFreq2(freqs)#
+	for (i in 1:length(baselevels))#
+		expfreqs[[i]] <- expfreqs[[i]] - baselevels[i]#
+	# Draw it#
+	par(mar = c(1, 4, 1, 2), lab = c(5, 3, 7))#
+	matplot(X, Y - Y[, 2], type = "l", xaxs = "i", xaxt = "n", lty = lty,#
+        col = 1, lwd = 2, bty = "l", xlim = xlim, ylim = c(-12, 20),#
+        ylab = ylab2,...)#
+	# Some options cannot be changed in the original boxplot function!#
+    # So, we use our own implementation here#
+	boxplot2(lapply(expfreqs, spreadCalc), col = "gray90", boxwex = boxwex,#
+        range = 0, add = TRUE, at = ages)#
+	# Draw tick marks for the X axis#
+	axis(1, labels = FALSE)#
+}#
+#
+#
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}#
+#
+freq1[,1]=seq(-100,1200,20)#
+freq2[,1]=seq(-100,1200,20)#
+times=seq(0:50)#
+#
+#
+rqFreqPlot(times, freq1, freqs1,barscale = .35, barcol = "gray90",#
+    boxwex = .15, xlim = c(0, 52), ylim = c(-120,1200), main = "",#
+    xlab = expression(paste(italic("t"), " (years)")),#
+    ylab1 = expression(paste(italic("D"), " (mm)")),#
+    ylab2 = expression(paste(Delta, italic("D"), " (mm)")), las = 1, lty = 1)#
+title("Sea urchin growth modeled using quantile regression")
+rm(list=ls())
+### A graph for presenting individual growth with time in a population with:#
+### Histograms of size distribution with time,#
+### Quantile regressions for the median and 5% / 95% percentiles,#
+### A graph quantile residuals using boxplots around the median model.#
+####
+### This graph is Fig. 2 of the paper: Grosjean, PH, Ch. Spirlet & M. Jangoux,#
+### 2003. A functional growth model with intraspecific competition applied to a#
+### sea urchin, Paracentrotus lividus. Can. J. Fish. Aquat. Sci., 60:237-246.#
+#
+### Requires two libraries and a couple of custom functions + an example dataset#
+library(stats)#
+library(quantreg)#
+#
+##### Custom functions required #####################################
+# Fuzzy-remanent growth curve with two different kinetic parameters#
+# passing by {0, 0}#
+# See Grosjean et al, 2003, Can. J. Fish. Aquat. Sci. 60:237-246,#
+# for definition and discussion of this growth model#
+fuzremOrig2 <- function (input, Asym, lrc1, lrc2, c0) {#
+    .expr1 <- exp(lrc1)#
+    .expr4 <- exp(-.expr1 * input)#
+    .expr5 <- 1 - .expr4#
+    .expr6 <- Asym * .expr5#
+    .expr7 <- exp(lrc2)#
+    .expr9 <- input - c0#
+    .expr11 <- exp(-.expr7 * .expr9)#
+    .expr12 <- 1 + .expr11#
+    .expr22 <- .expr12^2#
+    .value <- .expr6/.expr12#
+    .actualArgs <- as.list(match.call()[c("Asym", "lrc1", "lrc2", "c0")])#
+    if (all(unlist(lapply(.actualArgs, is.name)))) {#
+        .grad <- array(0, c(length(.value), 4),#
+            list(NULL, c("Asym", "lrc1", "lrc2", "c0")))#
+        .grad[, "Asym"] <- .expr5 / .expr12#
+        .grad[, "lrc1"] <- Asym * (.expr4 * (.expr1 * input)) / .expr12#
+        .grad[, "lrc2"] <- .expr6 * (.expr11 * (.expr7 * .expr9)) / .expr22#
+        .grad[, "c0"] <- -.expr6 * (.expr11 * .expr7) / .expr22#
+        dimnames(.grad) <- list(NULL, .actualArgs)#
+        attr(.value, "gradient") <- .grad#
+    }#
+    .value#
+}#
+# Self-starting function for fuzremOrig2#
+fuzremOrig2.ival <- function (mCall, data, LHS) {#
+    xy <- sortedXyData(mCall[["input"]], LHS, data)#
+    if (nrow(xy) < 5) {#
+        stop("Too few distinct input values to fit a fuzzy-remanent growth function with 2 kinetic parameter passing by {0, 0}")#
+    }#
+    xydata <- c(as.list(xy), c0 = NLSstClosestX(xy, mean(range(xy[["y"]]))))#
+    xydata <- as.list(xydata)#
+    options(show.error.messages = FALSE)#
+    # Sometimes, the following evaluation gives an error#
+    # (singular gradient, ...). Try another way to estimate initial parameters#
+    pars <- try(as.vector(coef(nls(y ~ (1 - exp(-exp(lrc) * x))/#
+        (1 + exp((c0 - x)*exp(lrc))), data = xydata, start = list(lrc = 0),#
+        algorithm = "plinear"))))#
+    if (!is.null(class(pars)) && class(pars) == "try-error") {#
+        cat("Using second alternative for initial parameters estimation\n")#
+        options(show.error.messages = TRUE)#
+        pars <- as.vector(coef(nls(y ~ SSlogis(x, Asym, xmid, scal),#
+            data = xydata)))#
+        xydata$c0 <- pars[2]#
+        pars[1] <- log(1/pars[3])#
+    } else { options(show.error.messages = TRUE)}#
+    pars <- as.vector(coef(nls(y ~ (1 - exp(-exp(lrc1) * x))/#
+        (1 + exp((c0 - x)*exp(lrc2))), data = data.frame(xy),#
+        start = list(c0 = xydata$c0, lrc1 = pars[1], lrc2 = pars[1]),#
+        algorithm = "plinear")))#
+    value <- c(pars[4], pars[2], pars[3], pars[1])#
+    names(value) <- mCall[c("Asym", "lrc1", "lrc2", "c0")]#
+    return(value)#
+}#
+# Self-Starting function, combining fuzremOrig2 and fuzremOrig2.ival#
+SSfuzremOrig2 <- selfStart(fuzremOrig2, fuzremOrig2.ival, para = "", template = "")#
+remove(fuzremOrig2, fuzremOrig2.ival)#
+attr(SSfuzremOrig2,"pnames") <- c("Asym", "lrc1", "lrc2", "c0")#
+#
+# Expand a "class"-"frequencies at time" data frame into#
+# a "time"-"mean size in class" data frame#
+expandFreq <- function(ages, freqs) {#
+	for (i in 2:ncol(freqs)){#
+		size <- rep(freqs[, 1], freqs[, i])#
+		age <- rep(ages[i-1], length(size))#
+		if (i == 2){#
+			res <- cbind(age, size)#
+		} else {#
+			res <- rbind(res, cbind(age, size))#
+		}#
+	}#
+	res <- as.data.frame(res)#
+	return(res)#
+}#
+#
+# Plot of size distributions, quantiles regressions and residuals diagnosis#
+# (boxplot) for curves tau = 0.05, 0.5 & 0.95 in the case of individual size#
+# distributions are known at each sampled time#
+rqFreqPlot <- function(ages, freq, freqs, xlim = c(min(ages),#
+    max(ages)), ylim=c(min(freqs),max(freqs)), barscale = 100, barcol = 8,#
+    boxwex = 50, ylab1 = "", ylab2 = "", lty = c(2, 1, 2), ...) {#
+#
+	# Create a layout for the histograms and the boxplots#
+	nf <- layout(matrix(c(2,1),2,1,byrow = TRUE), widths = 7,#
+        heights = c(2, 5), respect = TRUE)#
+	layout.show(nf)#
+	par(mar = c(5, 4, 0, 2), lab = c(5, 5, 7))#
+#
+	# Draw the histograms#
+	for (i in 1:length(ages)){#
+		par(new = TRUE)#
+		xmin <- -ages[i] + xlim[1]#
+		xmax <- xlim[2] - ages[i]#
+		ser <- freqs[, i+1]#
+		ser <- ser/max(ser) * barscale#
+		barplot(ser, horiz = TRUE, axes = FALSE, xlim = c(xmin, xmax),#
+            ylim = ylim, col = barcol, space = 0)#
+	}#
+	# Add a residual analysis above the graph#
+	spreadCalc <- function(x, na.rm = FALSE){#
+		# Substract median from expanded frequencies data#
+		# And narrow range to 0.05 - 0.95 quantiles#
+		res <- x#
+		q <- quantile(res, c(0.05, 0.95), na.rm = na.rm)#
+		res[res < q[1]] <- q[1]#
+		res[res > q[2]] <- q[2]#
+		return(res)#
+	}#
+	## Expand one or several frequency columns into individual measurements#
+	expandFreq2 <- function(freqs) {#
+		# Consider mean size at each class for expanding the observations#
+		# with classes being first column and frequencies in each class#
+        # in the following columns#
+		# A list of vectors is returned#
+		res <- list(NULL)#
+		nCols <- ncol(freqs)#
+		for (i in 2:nCols)#
+			res[[i-1]] <- rep(freqs[, 1], freqs[, i])#
+		return(res)#
+	}#
+#
+	# A modified boxplot.default() function with different parameters#
+    # (no box around the graph and plain lines for hinges)#
+	boxplot2 <- function (x, ..., range = 1.5, width = NULL, varwidth = FALSE,#
+        notch = FALSE, outline = TRUE, names, boxwex = 0.8, plot = TRUE,#
+        border = par("fg"), col = NULL, log = "", pars = NULL,#
+        horizontal = FALSE, add = FALSE, at = NULL) {#
+	    args <- list(x, ...)#
+	    namedargs <- if (!is.null(attributes(args)$names))#
+	        attributes(args)$names != ""#
+	    else rep(FALSE, length = length(args))#
+	    pars <- c(args[namedargs], pars)#
+	    groups <- if (is.list(x))#
+	        x#
+	    else args[!namedargs]#
+	    if (0 == (n <- length(groups)))#
+	        stop("invalid first argument")#
+	    if (length(class(groups)))#
+	        groups <- unclass(groups)#
+	    if (!missing(names))#
+	        attr(groups, "names") <- names#
+	    else {#
+	        if (is.null(attr(groups, "names")))#
+	            attr(groups, "names") <- 1:n#
+	        names <- attr(groups, "names")#
+	    }#
+	    for (i in 1:n) groups[i] <- list(boxplot.stats(groups[[i]], range))#
+	    stats <- matrix(0, nr = 5, nc = n)#
+	    conf <- matrix(0, nr = 2, nc = n)#
+	    ng <- out <- group <- numeric(0)#
+	    ct <- 1#
+	    for (i in groups) {#
+	        stats[, ct] <- i$stats#
+	        conf[, ct] <- i$conf#
+	        ng <- c(ng, i$n)#
+	        if ((lo <- length(i$out))) {#
+	            out <- c(out, i$out)#
+	            group <- c(group, rep(ct, lo))#
+	        }#
+	        ct <- ct + 1#
+	    }#
+	    z <- list(stats = stats, n = ng, conf = conf, out = out, group = group, names = names)#
+	    if (plot) {#
+	        bxp2(z, width, varwidth = varwidth, notch = notch, boxwex = boxwex, border = border, col = col, log = log, pars = pars, outline = outline, horizontal = horizontal, add = add, at = at)#
+	        invisible(z)#
+	    }#
+	    else z#
+	}#
+#
+	# A modified bxp() function for plotting the boxplot generated by boxplot2()#
+	bxp2 <- function (z, notch = FALSE, width = NULL, varwidth = FALSE,#
+        outline = TRUE, notch.frac = 0.5, boxwex = 0.8, border = par("fg"),#
+        col = NULL, log = "", pars = NULL, frame.plot = axes,#
+        horizontal = FALSE, add = FALSE, at = NULL, show.names = NULL, ...) {#
+	    pars <- c(pars, list(...))#
+	    bplt <- function(x, wid, stats, out, conf, notch, border,#
+	        col, horizontal) {#
+	        if (!any(is.na(stats))) {#
+	            wid <- wid/2#
+	            if (notch) {#
+	                xx <- x + wid * c(-1, 1, 1, notch.frac, 1, 1,#
+	                  -1, -1, -notch.frac, -1)#
+	                yy <- c(stats[c(2, 2)], conf[1], stats[3], conf[2],#
+	                  stats[c(4, 4)], conf[2], stats[3], conf[1])#
+	            }#
+	            else {#
+	                xx <- x + wid * c(-1, 1, 1, -1)#
+	                yy <- stats[c(2, 2, 4, 4)]#
+	            }#
+	            if (!notch)#
+	                notch.frac <- 1#
+	            wntch <- notch.frac * wid#
+	            if (horizontal) {#
+	                polygon(yy, xx, col = col, border = border)#
+	                segments(stats[3], x - wntch, stats[3], x + wntch,#
+	                  col = border)#
+	                segments(stats[c(1, 5)], rep(x, 2), stats[c(2,#
+	                  4)], rep(x, 2), lty = 1, col = border)#
+	                segments(stats[c(1, 5)], rep(x - wid/2, 2), stats[c(1,#
+	                  5)], rep(x + wid/2, 2), col = border)#
+	                do.call("points", c(list(out, rep(x, length(out))),#
+	                  pt.pars))#
+	            }#
+	            else {#
+	                polygon(xx, yy, col = col, border = border)#
+	                segments(x - wntch, stats[3], x + wntch, stats[3],#
+	                  col = border)#
+	                segments(rep(x, 2), stats[c(1, 5)], rep(x, 2),#
+	                  stats[c(2, 4)], lty = 1, col = border)#
+	                segments(rep(x - wid/2, 2), stats[c(1, 5)], rep(x +#
+	                  wid/2, 2), stats[c(1, 5)], col = border)#
+	                do.call("points", c(list(rep(x, length(out)),#
+	                  out), pt.pars))#
+	            }#
+	            if (any(inf <- !is.finite(out))) {#
+	                warning(paste("Outlier (", paste(unique(out[inf]),#
+	                  collapse = ", "), ") in ", paste(x, c("st",#
+	                  "nd", "rd", "th")[pmin(4, x)], sep = ""), " boxplot are NOT drawn",#
+	                  sep = ""))#
+	            }#
+	        }#
+	    }#
+	    if (!is.list(z) || 0 == (n <- length(z$n)))#
+	        stop("invalid first argument")#
+	    if (is.null(at))#
+	        at <- 1:n#
+	    else if (length(at) != n)#
+	        stop(paste("`at' must have same length as `z $ n', i.e.",#
+	            n))#
+	    if (is.null(z$out))#
+	        z$out <- numeric()#
+	    if (is.null(z$group) || !outline)#
+	        z$group <- integer()#
+	    if (is.null(pars$ylim))#
+	        ylim <- range(z$stats[is.finite(z$stats)], z$out[is.finite(z$out)],#
+	            if (notch)#
+	                z$conf[is.finite(z$conf)])#
+	    else {#
+	        ylim <- pars$ylim#
+	        pars$ylim <- NULL#
+	    }#
+	    width <- if (!is.null(width)) {#
+	        if (length(width) != n | any(is.na(width)) | any(width <= 0))#
+	            stop("invalid boxplot widths")#
+	        boxwex * width/max(width)#
+	    }#
+	    else if (varwidth)#
+	        boxwex * sqrt(z$n/max(z$n))#
+	    else if (n == 1)#
+	        0.5 * boxwex#
+	    else rep(boxwex, n)#
+	    if (missing(border) || length(border) == 0)#
+	        border <- par("fg")#
+	    pt.pars <- c(pars[names(pars) %in% c("pch", "cex", "bg")],#
+	        col = border)#
+	    for (i in 1:n) bplt(at[i], wid = width[i], stats = z$stats[,#
+	        i], out = z$out[z$group == i], conf = z$conf[, i], notch = notch,#
+	        border = border[(i - 1)%%length(border) + 1], col = if (is.null(col))#
+	            col#
+	        else col[(i - 1)%%length(col) + 1], horizontal = horizontal)#
+	    invisible(at)#
+	}#
+#
+	# Calculate and plot residuals#
+	baselevels <- curves[agecurves %in% ages, 2]#
+	expfreqs <- expandFreq2(freqs)#
+	for (i in 1:length(baselevels))#
+		expfreqs[[i]] <- expfreqs[[i]] - baselevels[i]#
+	# Draw it#
+	par(mar = c(1, 4, 1, 2), lab = c(5, 3, 7))#
+	matplot(X, Y - Y[, 2], type = "l", xaxs = "i", xaxt = "n", lty = lty,#
+        col = 1, lwd = 2, bty = "l", xlim = xlim, ylim = c(-12, 20),#
+        ylab = ylab2,...)#
+	# Some options cannot be changed in the original boxplot function!#
+    # So, we use our own implementation here#
+	boxplot2(lapply(expfreqs, spreadCalc), col = "gray90", boxwex = boxwex,#
+        range = 0, add = TRUE, at = ages)#
+	# Draw tick marks for the X axis#
+	axis(1, labels = FALSE)#
+}#
+#
+#
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}#
+#
+freq1[,1]=seq(-100,1200,20)#
+freq2[,1]=seq(-100,1200,20)#
+times=seq(0:50)#
+#
+#
+rqFreqPlot(times, freq1, freqs1,barscale = .35, barcol = "gray90",#
+    boxwex = .15, xlim = c(0, 52), ylim = c(-120,1200), main = "",#
+    xlab = expression(paste(italic("t"), " (years)")),#
+    ylab1 = expression(paste(italic("D"), " (mm)")),#
+    ylab2 = expression(paste(Delta, italic("D"), " (mm)")), las = 1, lty = 1)#
+title("Sea urchin growth modeled using quantile regression")
+rm(list=ls())
+?display
+?demo
+demo(graphics)
+?plot
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}
+freq1
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}#
+#
+freq1[,1]=seq(-100,1200,20)#
+freq2[,1]=seq(-100,1200,20)
+freq1
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}#
+#
+freq1[,1]=seq(-100,1200,20)#
+freq2[,1]=seq(-100,1200,20)
+freq1
+freq1 <- mat.or.vec(66,52)#
+freq2 <- mat.or.vec(66,52)#
+freqs1 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv")#
+freqs2 <- read.csv("/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv")#
+for(i in 1:51){#
+	freq1[,i+1]=hist(freqs1[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+	freq2[,i+1]=hist(freqs2[,i],seq(-120,1200,20),include.lowest = TRUE,plot=FALSE)$counts#
+}#
+#
+freq1[,1]=seq(-100,1200,20)#
+freq2[,1]=seq(-100,1200,20)
+freq2
+timingX10=read.csv('/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX10.csv')
+timingX11=read.csv('/Users/wenhaonie/Dropbox/Year 2 Case Study/Cash flow analysis/TimingX11.csv')
+timingX10
+timingX10[,1]
+timingX10[1,]
+?average
+??average
+ave(timingX10)
+a[1,]=(1:3)
+a[2,]=(3:6)
+?c
+a[1,]=1:3
+?table
+a=1:3
+a
+a=table(1:3, 2:4, 5:7)
+a
+a=table(1:3, 1:3)
+a
+a[1,]=1:3
+a
+a[2,]=3:6
+a
+a[2,]=3:6
+a[2,]=3:5
+a[3,]=5:7
+a
+ave(a)
+ave(a[1,])
+a[2]
+a
+a[2,]
+b=ave(a[,2])
+b
+c=a[,2]
+c
+ave(c)
+a[1,]=100:102
+a[2,]=50:52
+a[3,]=70:72
+a[2]
+a[2,]
+ave(a[1,])
+b=ave(a[,2])
+b
+a
+ave(a[,2])
+ave(a[,3])
+ave(a[,1])
+dim(timingX10)
+dim(timingX11)
+for (i in C(1:51)){#
+	averageX10[i]=sum(timingX10[,i])/1000#
+	averageX11[i]=sum(timingX11[,i])/1000#
+}
+for (i in c(1:51)){#
+	averageX10[i]=sum(timingX10[,i])/1000#
+	averageX11[i]=sum(timingX11[,i])/1000#
+}
+for (i in c(1:51)){#
+	averageX10[i]<-sum(timingX10[,i])/1000#
+	averageX11[i]<-sum(timingX11[,i])/1000#
+}
+averageX10=0#
+averageX11=0#
+for (i in c(1:51)){#
+	averageX10[i]<-sum(timingX10[,i])/1000#
+	averageX11[i]<-sum(timingX11[,i])/1000#
+}
+averageX10
+averageX11
+timingX10.title
+timingX10.head
+title(timingX10)
+head(timingX10)
+timingX10
+header(timingX10)
+timingX10[0,]
+g_range=timingX10[0,]
+g_range=range(0,averageX10,averageX11)
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, axes=false,ann=false)#
+axis(1,at=1:51,lab=timingX10[0,])#
+box()#
+lines(averageX11,type='o',pch=22,lty=2)
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, axes=false,ann=false)#
+axis(1,at=1:51,lab=timingX10[0,])#
+box()#
+lines(averageX11,type='o',pch=22,lty=2)#
+#
+title(xlab="Years")#
+title(ylab="AverageNPV($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=21:22,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=22,lty=2)#
+#
+title(xlab="Year")#
+title(ylab="AverageNPV($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=21:22,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+#
+title(xlab="Year")#
+title(ylab="AverageNPV($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+#
+title(xlab="Year")#
+title(ylab="Cash flow($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+axis(1,at=1:51,lab=c(1:51))#
+#
+#
+title(xlab="Year")#
+title(ylab="Cash flow($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+axis(1,at=1:51,lab=c(1:51))#
+axis(2, at=5*(-50):max(averageX10))#
+#
+#
+title(xlab="Year")#
+title(ylab="Cash flow($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+axis(1,at=1:51,lab=c(1:51))#
+axis(2, at=20*(-50):max(averageX10))#
+#
+#
+title(xlab="Year")#
+title(ylab="Cash flow($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+?tornado
+??tornado
+#
+for(i in 1:21)#
+	tableName<-"G_"+i#
+	tables[i]<-read.xls(tableName, sheet=1, verbose=false)
+#
+for(i in 1:21)#
+	tableName<-"G_"&i#
+	tables[i]<-read.xls(tableName, sheet=1, verbose=false)
+#
+for(i in 1:21)#
+	tableName<-names("G_"&i)#
+	tables[i]<-read.xls(tableName, sheet=1, verbose=false)
+#
+for(i in 1:21)#
+	tableName<-"G_"+as.name(i)#
+	tables[i]<-read.xls(tableName, sheet=1, verbose=false)
+power.t.test(type="one.sample",power=0.8,sd=sqrt(10),delta=2)
+help power
+help(power)
+yvals<-read.table("/Users/wenhaonie/Desktop/Statistics R learning/yvalues.txt")
+attach(yvals)
+hist(y)
+y
+yvals
+rm(list=ls())#
+#
+yvals<-read.table("/Users/wenhaonie/Desktop/Statistics R learning/yvalues.txt",header=T)#
+#
+attach(yvals)#
+#
+hist(y)
+y
+yvals
+arithmetic.mean<-function(x){}
+arithmetic.mean<-function(x){sum(x)/length(x)}
+arthmetic.mean
+arithmetic.mean
+data<-c(3,4,6,7)
+arthmetic.mean(data)
+arithmetic.mean(data)
+arithmetic(y)
+arithmetic.mean(y)
+clear
+clear()
+pwd
+pwd()
+sorted<-sort(y)
+sorted
+y.even<-y[-1]
+med<-function(x){}
+med<-function(x){#
+odd.even<-length(x)%%2#
+}
+med<-function(x){#
+odd.even<-length(x)%%2#
+if(odd.even==0)(sort(x)[length(x)/2]+sort(x)[1+length(x)/2])/2#
+else sort(x)[ceiling(length(x)/2)]#
+}
+med(y)
+med(y.even)
+plot(c(0.32),c(0.15),type="n",xlab="Sample Size", ylab="Variance")#
+#
+for(df in seq(3,31,2)){#
+	for(i in 1:30){#
+		x<-rnorm(df, mean=10,sd=2)#
+		points(df, var(x))#
+	}#
+}
+clear(ls())#
+#
+plot(c(0,32),c(0,15),type="n",xlab="Sample Size", ylab="Variance")#
+#
+for(df in seq(3,31,2)){#
+	for(i in 1:30){#
+		x<-rnorm(df, mean=10,sd=2)#
+		points(df, var(x))#
+	}#
+}
+help clear
+help(clear)
+help(??clear)
+??clear
+rm(list=ls())
+rm(list=ls())#
+#
+plot(c(0,32),c(0,15),type="n",xlab="Sample Size", ylab="Variance")#
+#
+for(df in seq(3,31,2)){#
+	for(i in 1:30){#
+		x<-rnorm(df, mean=10,sd=2)#
+		points(df, var(x))#
+	}#
+}
+x
+seq(3,31,2)
+rnorm(3,mean=10,sd=2)
+help(rnorm)
+qt(0.025,9)
+qt(0.975,9)
+rm(list=ls())
+data<-read.table("/Users/wenhaonie/Desktop/Statistics R learning/skewdata.txt",header=T)
+attach(data)
+names(data)
+data
+numeric(10000)
+values
+sample(values, 5, replace=T)
+c(5,5)
+quantile(numeric(10000),c(0.25,.975))
+rm(list=ls())#
+#
+data<-read.table("/Users/wenhaonie/Desktop/Statistics R learning/skewdata.txt",header=T)#
+attach(data)#
+names(data)#
+#
+plot(c(0,30),c(0,60),type="n",xlab="sample size",ylab="confidence interval")#
+for(k in seq(5,30,3)){#
+	a<-numeric(10000)#
+	for(i in 1:10000){#
+		a[i]<-mean(sample(values,k,replace=T))#
+	}#
+	points(c(k,k),quantile(a,c(.025,.975)),type="b")#
+}
+mean(values)
+length(values)
+qt(0.025,29)
+qt(0.972,30)
+qt(0.025,30)
+qt(0.975,30)
+results=read(/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CashFlows)
+help(read)
+help read
+results=read.table(/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CashFlows)
+results=read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CashFlows")
+results
+plot(results)
+attach(results)
+V1
+plot(V1)
+plot(V1/1000)
+results=read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/NPVs")
+results
+V1
+attach(results)
+V1
+plot(V1/1000)
+read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/RunningAverages")
+result=read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/RunningAverages")
+result
+attach(result)
+plot(V1)
+getwd()
+rm(list=ls())#
+#
+setwd("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/Results")#
+#
+result=read.csv("RA", header=FALSE)
+result
+result[,2]
+result[,3]
+result[,1]
+plot(result[1,3:length(result)])
+plot(result[1,3:100])
+plot(result[1,3:5])
+result[,3:length(result)]=result[,3:length(result)]/1000
+result
+plot(result[1,3:length(result)])
+plot()
+plot(1)
+plot(result)
+plot(result[1,3:length(result)])
+plot(result[1,3:50])
+plot(result[, 1])
+result=t(result)
+result
+dim(result)
+plot(result[3:1003, 200])
+rm(list=ls())#
+#
+setwd("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/Results")#
+#
+result=read.csv("RA", header=FALSE)#
+#
+result[,3:length(result)]=result[,3:length(result)]/1000#
+#
+result=t(result)#
+#
+postscript("RA", width=1200,height=1000)#
+#
+par(mfrow=c(4,5), mar=c(5,5,5,3))#
+#
+for(i in 1:20){#
+	plot(result[3:1003, i], xlab="No.of Monte Carlo Trials", ylab="Running Average of NPVs($million)")#
+	title(i)	#
+}#
+#
+dev.off()
+rm(list=ls())#
+#
+setwd("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/Results")#
+#
+result=read.csv("RAplot_2", header=FALSE)#
+#
+result[,3:length(result)]=result[,3:length(result)]/1000#
+#
+result=t(result)#
+#
+postscript("RA", width=1200,height=1000)#
+#
+par(mfrow=c(4,5), mar=c(5,5,5,3))#
+#
+for(i in 1:20){#
+	plot(result[3:1003, i], xlab="No.of Monte Carlo Trials", ylab="Running Average of NPVs($million)")#
+	title(i)	#
+}#
+#
+dev.off()
+rm(list=ls())#
+#
+setwd("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/Results")#
+#
+result=read.csv("RA", header=FALSE)#
+#
+result[,3:length(result)]=result[,3:length(result)]/1000#
+#
+result=t(result)#
+#
+postscript("RAplot_2", width=1200,height=1000)#
+#
+par(mfrow=c(4,5), mar=c(5,5,5,3))#
+#
+for(i in 1:20){#
+	plot(result[3:1003, i], xlab="No.of Monte Carlo Trials", ylab="Running Average of NPVs($million)")#
+	title(i)	#
+}#
+#
+dev.off()
+result

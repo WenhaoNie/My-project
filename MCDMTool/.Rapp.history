@@ -1,0 +1,968 @@
+a
+a[1,]=1:3
+a
+a[2,]=3:6
+a
+a[2,]=3:6
+a[2,]=3:5
+a[3,]=5:7
+a
+ave(a)
+ave(a[1,])
+a[2]
+a
+a[2,]
+b=ave(a[,2])
+b
+c=a[,2]
+c
+ave(c)
+a[1,]=100:102
+a[2,]=50:52
+a[3,]=70:72
+a[2]
+a[2,]
+ave(a[1,])
+b=ave(a[,2])
+b
+a
+ave(a[,2])
+ave(a[,3])
+ave(a[,1])
+dim(timingX10)
+dim(timingX11)
+for (i in C(1:51)){#
+	averageX10[i]=sum(timingX10[,i])/1000#
+	averageX11[i]=sum(timingX11[,i])/1000#
+}
+for (i in c(1:51)){#
+	averageX10[i]=sum(timingX10[,i])/1000#
+	averageX11[i]=sum(timingX11[,i])/1000#
+}
+for (i in c(1:51)){#
+	averageX10[i]<-sum(timingX10[,i])/1000#
+	averageX11[i]<-sum(timingX11[,i])/1000#
+}
+averageX10=0#
+averageX11=0#
+for (i in c(1:51)){#
+	averageX10[i]<-sum(timingX10[,i])/1000#
+	averageX11[i]<-sum(timingX11[,i])/1000#
+}
+averageX10
+averageX11
+timingX10.title
+timingX10.head
+title(timingX10)
+head(timingX10)
+timingX10
+header(timingX10)
+timingX10[0,]
+g_range=timingX10[0,]
+g_range=range(0,averageX10,averageX11)
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, axes=false,ann=false)#
+axis(1,at=1:51,lab=timingX10[0,])#
+box()#
+lines(averageX11,type='o',pch=22,lty=2)
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, axes=false,ann=false)#
+axis(1,at=1:51,lab=timingX10[0,])#
+box()#
+lines(averageX11,type='o',pch=22,lty=2)#
+#
+title(xlab="Years")#
+title(ylab="AverageNPV($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=21:22,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=22,lty=2)#
+#
+title(xlab="Year")#
+title(ylab="AverageNPV($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=21:22,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+#
+title(xlab="Year")#
+title(ylab="AverageNPV($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+#
+title(xlab="Year")#
+title(ylab="Cash flow($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+axis(1,at=1:51,lab=c(1:51))#
+#
+#
+title(xlab="Year")#
+title(ylab="Cash flow($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+axis(1,at=1:51,lab=c(1:51))#
+axis(2, at=5*(-50):max(averageX10))#
+#
+#
+title(xlab="Year")#
+title(ylab="Cash flow($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+g_range=range(0,averageX10,averageX11)#
+#
+plot(averageX10, type='o', ylim=g_range, pch=17,axes=false,ann=false)#
+#
+box()#
+lines(averageX11,type='o',pch=20,lty=2)#
+axis(1,at=1:51,lab=c(1:51))#
+axis(2, at=20*(-50):max(averageX10))#
+#
+#
+title(xlab="Year")#
+title(ylab="Cash flow($Million)")#
+#
+legend(1,g_range[2],c("X10","X11"),cex=0.8,pch=17:20,lty=1:2);
+?tornado
+??tornado
+#
+for(i in 1:21)#
+	tableName<-"G_"+i#
+	tables[i]<-read.xls(tableName, sheet=1, verbose=false)
+#
+for(i in 1:21)#
+	tableName<-"G_"&i#
+	tables[i]<-read.xls(tableName, sheet=1, verbose=false)
+#
+for(i in 1:21)#
+	tableName<-names("G_"&i)#
+	tables[i]<-read.xls(tableName, sheet=1, verbose=false)
+#
+for(i in 1:21)#
+	tableName<-"G_"+as.name(i)#
+	tables[i]<-read.xls(tableName, sheet=1, verbose=false)
+power.t.test(type="one.sample",power=0.8,sd=sqrt(10),delta=2)
+help power
+help(power)
+yvals<-read.table("/Users/wenhaonie/Desktop/Statistics R learning/yvalues.txt")
+attach(yvals)
+hist(y)
+y
+yvals
+rm(list=ls())#
+#
+yvals<-read.table("/Users/wenhaonie/Desktop/Statistics R learning/yvalues.txt",header=T)#
+#
+attach(yvals)#
+#
+hist(y)
+y
+yvals
+arithmetic.mean<-function(x){}
+arithmetic.mean<-function(x){sum(x)/length(x)}
+arthmetic.mean
+arithmetic.mean
+data<-c(3,4,6,7)
+arthmetic.mean(data)
+arithmetic.mean(data)
+arithmetic(y)
+arithmetic.mean(y)
+clear
+clear()
+pwd
+pwd()
+sorted<-sort(y)
+sorted
+y.even<-y[-1]
+med<-function(x){}
+med<-function(x){#
+odd.even<-length(x)%%2#
+}
+med<-function(x){#
+odd.even<-length(x)%%2#
+if(odd.even==0)(sort(x)[length(x)/2]+sort(x)[1+length(x)/2])/2#
+else sort(x)[ceiling(length(x)/2)]#
+}
+med(y)
+med(y.even)
+plot(c(0.32),c(0.15),type="n",xlab="Sample Size", ylab="Variance")#
+#
+for(df in seq(3,31,2)){#
+	for(i in 1:30){#
+		x<-rnorm(df, mean=10,sd=2)#
+		points(df, var(x))#
+	}#
+}
+clear(ls())#
+#
+plot(c(0,32),c(0,15),type="n",xlab="Sample Size", ylab="Variance")#
+#
+for(df in seq(3,31,2)){#
+	for(i in 1:30){#
+		x<-rnorm(df, mean=10,sd=2)#
+		points(df, var(x))#
+	}#
+}
+help clear
+help(clear)
+help(??clear)
+??clear
+rm(list=ls())
+rm(list=ls())#
+#
+plot(c(0,32),c(0,15),type="n",xlab="Sample Size", ylab="Variance")#
+#
+for(df in seq(3,31,2)){#
+	for(i in 1:30){#
+		x<-rnorm(df, mean=10,sd=2)#
+		points(df, var(x))#
+	}#
+}
+x
+seq(3,31,2)
+rnorm(3,mean=10,sd=2)
+help(rnorm)
+qt(0.025,9)
+qt(0.975,9)
+rm(list=ls())
+data<-read.table("/Users/wenhaonie/Desktop/Statistics R learning/skewdata.txt",header=T)
+attach(data)
+names(data)
+data
+numeric(10000)
+values
+sample(values, 5, replace=T)
+c(5,5)
+quantile(numeric(10000),c(0.25,.975))
+rm(list=ls())#
+#
+data<-read.table("/Users/wenhaonie/Desktop/Statistics R learning/skewdata.txt",header=T)#
+attach(data)#
+names(data)#
+#
+plot(c(0,30),c(0,60),type="n",xlab="sample size",ylab="confidence interval")#
+for(k in seq(5,30,3)){#
+	a<-numeric(10000)#
+	for(i in 1:10000){#
+		a[i]<-mean(sample(values,k,replace=T))#
+	}#
+	points(c(k,k),quantile(a,c(.025,.975)),type="b")#
+}
+mean(values)
+length(values)
+qt(0.025,29)
+qt(0.972,30)
+qt(0.025,30)
+qt(0.975,30)
+results=read(/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CashFlows)
+help(read)
+help read
+results=read.table(/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CashFlows)
+results=read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CashFlows")
+results
+plot(results)
+attach(results)
+V1
+plot(V1)
+plot(V1/1000)
+results=read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/NPVs")
+results
+V1
+attach(results)
+V1
+plot(V1/1000)
+read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/RunningAverages")
+result=read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/RunningAverages")
+result
+attach(result)
+plot(V1)
+result=read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1")
+result
+result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1")
+result
+result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1",header=FALSE)
+result
+attach(result)
+V5
+CMOcontent=V5+V6+V7+V8+V9
+CMOcontent
+sum(CMOcontent)/50
+clear=ls()#
+#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1")#
+#
+attach(result1)#
+#
+CMOcontent1=V5+V6+V7+V8+V9#
+#
+scenario1CMOweights=sum(CMOcontent1)/50#
+#
+#
+#
+result2=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2")#
+#
+attach(result2)#
+#
+CMOcontent2=V5+V6+V7+V8+V9#
+#
+scenario2CMOweights=sum(CMOcontent2)/50#
+#
+#
+#
+result3=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3")#
+#
+attach(result3)#
+#
+CMOcontent3=V5+V6+V7+V8+V9#
+#
+scenario2CMOweights=sum(CMOcontent3)/50
+CMOcontent1
+scenario1CMOweights
+scenario2CMOweights
+clear=ls()#
+#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1")#
+#
+attach(result1)#
+#
+CMOcontent1=V5+V6+V7+V8+V9#
+#
+scenario1CMOweights=sum(CMOcontent1)/50#
+#
+scenario1CMOweights
+clear(list=ls())#
+#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1")#
+#
+attach(result1)#
+#
+CMOcontent1=V5+V6+V7+V8+V9#
+#
+scenario1CMOweights=sum(CMOcontent1)/50#
+#
+scenario1CMOweights
+rm(list=ls())#
+#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1")#
+#
+attach(result1)#
+#
+CMOcontent1=V5+V6+V7+V8+V9#
+#
+scenario1CMOweights=sum(CMOcontent1)/50#
+#
+scenario1CMOweights
+rm(list=ls())#
+#
+result2=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2")#
+#
+attach(result2)#
+#
+CMOcontent2=V5+V6+V7+V8+V9#
+#
+scenario2CMOweights=sum(CMOcontent2)/50#
+#
+scenario2CMOweights
+rm(list=ls())#
+#
+result3=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3")#
+#
+attach(result3)#
+#
+CMOcontent3=V5+V6+V7+V8+V9#
+#
+scenario3CMOweights=sum(CMOcontent3)/50#
+#
+scenario3CMOweights
+help(rm)
+help(ls)
+ls()
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1")
+result2=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2")
+result3=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3")
+rm(list=ls())#
+#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+#
+attach(result1)#
+#
+CMOcontent1=V5+V6+V7+V8+V9#
+#
+scenario1CMOweights=sum(CMOcontent1)/50#
+#
+scenario1CMOweights
+ls()
+ls()
+rm(list=ls())#
+#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+#
+attach(result1)#
+#
+CMOcontent1=V5+V6+V7+V8+V9#
+#
+scenario1CMOweights=sum(CMOcontent1)/50#
+#
+scenario1CMOweights
+result1
+result1=result1((1,29),)
+result1=result1(seq(1,29),)
+result1=result1[seq(1,29),]
+result1
+rm(list=ls())#
+#
+result2=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2",header=FALSE)#
+#
+attach(result2)#
+#
+CMOcontent2=V5+V6+V7+V8+V9#
+#
+scenario2CMOweights=sum(CMOcontent2)/50#
+#
+scenario2CMOweights
+rm(list=ls())#
+#
+result3=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3",header=FALSE)#
+#
+attach(result3)#
+#
+CMOcontent3=V5+V6+V7+V8+V9#
+#
+scenario3CMOweights=sum(CMOcontent3)/50#
+#
+scenario3CMOweights
+result3
+result3[V1<11,]
+dim(result3)
+dim(result3)(2)
+dim(result3)(1)
+dim(result3)[1]
+result3=result3[V1<11,]
+result3
+dim(result3)[2]
+dim(result3)[1]
+V1
+result3[,1]
+rm(list=ls())#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+attach(result1)#
+result1=result1[V1<11,]#
+num1=dim(result1)[1]#
+CMOcontent1=result1[,5]+result1[,6]+result1[,7]+result1[,8]+result1[,9]#
+scenario1CMOweights=sum(CMOcontent1)/num1#
+scenario1CMOweights
+rm(list=ls())#
+result2=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2",header=FALSE)#
+attach(result2)#
+result2=result2[V1<11,]#
+num2=dim(result2)[1]#
+CMOcontent2=result2[,5]+result2[,6]+result2[,7]+result2[,8]+result2[,9]#
+scenario2CMOweights=sum(CMOcontent2)/num2#
+scenario2CMOweights
+rm(list=ls())#
+result3=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3",header=FALSE)#
+attach(result3)#
+result3=result3[V1<11,]#
+num3=dim(result3)[1]#
+CMOcontent3=result3[,5]+result3[,6]+result3[,7]+result3[,8]+result3[,9]#
+scenario3CMOweights=sum(CMOcontent3)/num3#
+scenario3CMOweights
+rm(list=ls())#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+attach(result1)#
+result1=result1[V1<6,]#
+num1=dim(result1)[1]#
+CMOcontent1=result1[,5]+result1[,6]+result1[,7]+result1[,8]+result1[,9]#
+scenario1CMOweights=sum(CMOcontent1)/num1#
+scenario1CMOweights
+rm(list=ls())#
+result2=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2",header=FALSE)#
+attach(result2)#
+result2=result2[V1<6,]#
+num2=dim(result2)[1]#
+CMOcontent2=result2[,5]+result2[,6]+result2[,7]+result2[,8]+result2[,9]#
+scenario2CMOweights=sum(CMOcontent2)/num2#
+scenario2CMOweights
+rm(list=ls())#
+result3=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3",header=FALSE)#
+attach(result3)#
+result3=result3[V1<6,]#
+num3=dim(result3)[1]#
+CMOcontent3=result3[,5]+result3[,6]+result3[,7]+result3[,8]+result3[,9]#
+scenario3CMOweights=sum(CMOcontent3)/num3#
+scenario3CMOweights
+rm(list=ls())#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+attach(result1)#
+result1=result1[V1<3,]#
+num1=dim(result1)[1]#
+CMOcontent1=result1[,5]+result1[,6]+result1[,7]+result1[,8]+result1[,9]#
+scenario1CMOweights=sum(CMOcontent1)/num1#
+scenario1CMOweights
+rm(list=ls())#
+result2=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2",header=FALSE)#
+attach(result2)#
+result2=result2[V1<3,]#
+num2=dim(result2)[1]#
+CMOcontent2=result2[,5]+result2[,6]+result2[,7]+result2[,8]+result2[,9]#
+scenario2CMOweights=sum(CMOcontent2)/num2#
+scenario2CMOweights
+rm(list=ls())#
+result3=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3",header=FALSE)#
+attach(result3)#
+result3=result3[V1<3,]#
+num3=dim(result3)[1]#
+CMOcontent3=result3[,5]+result3[,6]+result3[,7]+result3[,8]+result3[,9]#
+scenario3CMOweights=sum(CMOcontent3)/num3#
+scenario3CMOweights
+rm(list=ls())#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+attach(result1)#
+result1=result1[V1<1,]#
+num1=dim(result1)[1]#
+CMOcontent1=result1[,5]+result1[,6]+result1[,7]+result1[,8]+result1[,9]#
+scenario1CMOweights=sum(CMOcontent1)/num1#
+scenario1CMOweights
+rm(list=ls())#
+result2=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2",header=FALSE)#
+attach(result2)#
+result2=result2[V1<1,]#
+num2=dim(result2)[1]#
+CMOcontent2=result2[,5]+result2[,6]+result2[,7]+result2[,8]+result2[,9]#
+scenario2CMOweights=sum(CMOcontent2)/num2#
+scenario2CMOweights
+rm(list=ls())#
+result3=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3",header=FALSE)#
+attach(result3)#
+result3=result3[V1<1,]#
+num3=dim(result3)[1]#
+CMOcontent3=result3[,5]+result3[,6]+result3[,7]+result3[,8]+result3[,9]#
+scenario3CMOweights=sum(CMOcontent3)/num3#
+scenario3CMOweights
+i=1#
+result1=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_"+i, header=FALSE)
+rm(list=ls())#
+#
+scenario=3#
+#
+for(rank=1:11){#
+	for(i=1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]=CMO/num#
+	}#
+}#
+#
+CMOcontent
+rm(list=ls())
+scenario=3
+for(rank=1:11){
+	for(i=1:scenario){
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)
+		attach(result)
+		result=result[V1<rank,]
+rm(list=ls())#
+#
+for(i=1:3){#
+	i#
+}
+rm(list=ls())#
+#
+scenario=3#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]=CMO/num#
+	}#
+}#
+#
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent[11,scenario]#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]=CMO/num#
+	}#
+}#
+#
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent[11,scenario]#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]<-CMO/num#
+	}#
+}#
+#
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]<-CMO/num#
+	}#
+}#
+#
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent<-mat(11,scenario)#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]<-CMO/num#
+	}#
+}#
+#
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent<-mat.or.vec(11,scenario)#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]<-CMO/num#
+	}#
+}#
+#
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent<-mat.or.vec(11,scenario)#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]<-CMO/num#
+	}#
+}#
+#
+CMOcontent
+help(dataframe)
+??dataframe
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent<-mat.or.vec(11,scenario)#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]=CMO/num#
+	}#
+}#
+#
+CMOcontent
+CMOcontent[1,1]
+CMOcontent[1,1]=0
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent<-mat.or.vec(11,scenario)#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}#
+		else if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}#
+		else if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]=CMO/num#
+	}#
+}#
+#
+CMOcontent
+CMOcontent[1,1]=0
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent<-mat.or.vec(11,scenario)#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}else#
+		if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}else#
+		if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]=CMO/num#
+	}#
+}#
+#
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent<-mat.or.vec(11,scenario)#
+#
+for(rank in 1:11)#
+	for(i in 1:scenario)#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}else#
+		if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}else#
+		if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[rank,i]=CMO/num#
+	#
+#
+#
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent<-mat.or.vec(1,33)#
+#
+count=1;#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1", header=FALSE)#
+		}else#
+		if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2", header=FALSE)#
+		}else#
+		if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3", header=FALSE)#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[count]=CMO/num#
+		count=count+1#
+	}#
+}#
+#
+CMOcontent
+rm(list=ls())#
+#
+scenario=3#
+#
+CMOcontent<-mat.or.vec(1,33)#
+#
+count=1;#
+#
+for(rank in 1:11){#
+	for(i in 1:scenario){#
+		if(i==1){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_1")#
+		}else#
+		if(i==2){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_2")#
+		}else#
+		if(i==3){#
+			result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/CMOvsInHouseS_3")#
+		}#
+		attach(result)#
+		result=result[V1<rank,]#
+		num=dim(result)[1]#
+		CMO=result[,5]+result[,6]+result[,7]+result[,8]+result[,9]#
+		CMOcontent[count]=CMO/num#
+		count=count+1#
+	}#
+}#
+#
+CMOcontent
+result=read.table("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/RA", header=FALSE)
+result
+rm(list=ls())#
+#
+result=read.csv("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool/RA", header=FALSE)
+result
+dim(result)
+length(result)
+result[,1]
+result[,2]
+plot(result[1,3:length(result)])
+plot(result[2,3:length(result)])
+getwd()
+setwd("/Users/wenhaonie/Dropbox/Eclipse Projects/MCDMTool")
+getwd()
