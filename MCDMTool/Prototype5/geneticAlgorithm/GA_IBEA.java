@@ -327,7 +327,9 @@ public class GA_IBEA extends Algorithm{
         removeWorst(archive);
       }
       
+      
       //test//this code print out current population
+      Ranking currentRank=new Ranking(archive);//rank the solutionSet
       archive.printFitnessToFile("CMOvsInHouseE_"+extent+"_S_"+scenario+"_G_"+generation);
       generation++;
       //test//end

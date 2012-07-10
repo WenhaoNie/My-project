@@ -346,6 +346,47 @@ public class SolutionSet implements Serializable {
   }//print everything, by Wenhao
   
   
+  /**
+   * writes the fitness, ranking and all to files
+   * by Wenhao
+   */
+  public void printFitnessToFile(String path){
+	  try {
+		  /* Open the file */
+		  FileOutputStream fos   = new FileOutputStream(path)     ;
+		  OutputStreamWriter osw = new OutputStreamWriter(fos)    ;
+		  BufferedWriter bw      = new BufferedWriter(osw)        ;
+		  
+		  int numberOfVariables	=solutionsList_.get(0).getDecisionVariables().length;
+		  for (int i = 0; i < solutionsList_.size(); i++) {
+			  
+		      bw.write(solutionsList_.get(i).getRank()+","+solutionsList_.get(i).toString()+solutionsList_.get(i).getFitness()+",");
+		      for (int j = 0; j < numberOfVariables; j++){
+		    	  bw.write(solutionsList_.get(i).getDecisionVariables()[j].toString() + ",");
+		      }
+		      
+		      for(int j=0;j<numberOfVariables;j++){
+		    	  bw.write(solutionsList_.get(i).timeToMarket[j]+",");
+		      }
+		      
+		      for(int j=0;j<numberOfVariables;j++){
+		    	  bw.write(solutionsList_.get(i).successCount[j]+",");
+		      }
+
+		      for(int j=0;j<numberOfVariables;j++){
+		    	  bw.write(solutionsList_.get(i).timeFDA_Approval[j]+",");
+		      }
+		      bw.newLine();
+		  }
+		        
+		  /* Close the file */
+		  bw.close();
+		  }catch (IOException e) {
+		  Configuration.logger_.severe("Error acceding to the file");
+		  e.printStackTrace();
+		  }
+  }//by wenhao
+  
   
  
   /**
